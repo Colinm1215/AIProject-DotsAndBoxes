@@ -29,6 +29,10 @@ def print_board(board):
 
 def place_move(board, player, move_r, move_c):
     if move_r % 2 == 0:
+        if move_c % 2 == 0:
+            return "Invalid Move"
+        else:
+            board[move_r][move_c] = "-"
         row_above = move_r - 2
         row_below = move_r + 2
         if row_above >= 0:
@@ -50,6 +54,10 @@ def place_move(board, player, move_r, move_c):
                             if board[move_r + 1][col_right] == "|":
                                 board[move_r + 1][move_c] = player
     else:
+        if move_c % 2 == 0:
+            board[move_r][move_c] = "|"
+        else:
+            return "Invalid Move"
         col_left = move_c - 2
         col_right = move_c + 2
         if col_left >= 0:
@@ -76,9 +84,11 @@ if __name__ == '__main__':
     player_input_size = 3
     board = create_gameboard((player_input_size*2)-1)
     board[2][1] = "-"
-    board[1][2] = "|"
-    board[0][1] = "-"
-    print_board(board)
+    board[2][3] = "-"
     board[1][0] = "|"
-    place_move(board, "1", 0, 1)
+    board[1][4] = "|"
+    board[0][1] = "-"
+    board[0][3] = "-"
+    print_board(board)
+    place_move(board, "1", 1, 2)
     print_board(board)
