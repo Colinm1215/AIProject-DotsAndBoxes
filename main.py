@@ -4,9 +4,23 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-# def read_gamestate(file_path):
+def read_gamestate(file_path):
+    board = []
+    f = open(file_path, "r")
+    for x in f:
+        if not x or x == "" or x == "\n":
+            continue
+        row = []
+        for c in x:
+            if not c or c == "" or c == "\n":
+                continue
+            row.append(c)
+        board.append(row)
+    return board
+
 
 def create_gameboard(size):
+    size = size*2 + 1
     board = [[" "] * size for i in range(size)]
     i = 0
     while i < size:
@@ -79,16 +93,39 @@ def place_move(board, player, move_r, move_c):
                             if board[row_below][move_c+1] == "-":
                                 board[move_r][move_c+1] = player
 
+# returns 0 if board not finished
+# returns 1 if player 1 wins
+# returns 2 if player 2 wins
+# returns 3 if a tie occurs
+def check_win(board):
+    size = len(board)
+    r = 1
+    player1_count = 0
+    player2_count = 0
+    while r < size:
+        c = 1
+        while c < size:
+            if board[r][c] == "1":
+                player1_count += 1
+            elif board[r][c] == "2":
+                player2_count += 1
+            else:
+                return 0
+            c += 2
+        r += 2
+    if player2_count + player1_count != size - 1:
+        return 0
+    else:
+        if player1_count > player2_count:
+            return 1
+        elif player2_count > player1_count:
+            return 2
+        else:
+            return 3
+
+
 
 if __name__ == '__main__':
-    player_input_size = 3
-    board = create_gameboard((player_input_size*2)-1)
-    board[2][1] = "-"
-    board[2][3] = "-"
-    board[1][0] = "|"
-    board[1][4] = "|"
-    board[0][1] = "-"
-    board[0][3] = "-"
+    board = read_gamestate("test_gamestate.txt")
     print_board(board)
-    place_move(board, "1", 1, 2)
-    print_board(board)
+    print(check_win(board))
