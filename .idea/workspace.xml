@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="" />
+    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/scenario1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario10-5.4.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario11-5.5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario12-5.6.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario13-7.1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario14-7.2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario15-7.3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario3-3.3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario4-3.4.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario5-3.5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario6-3.6.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario7-5.1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario8-5.2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario9-5.3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,13 +39,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/colin/Desktop/AIProject-DotsAndBoxes&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/jarre/Desktop/WPI MCS Course Work/Spring 2023/CS534/Project/AIProject-DotsAndBoxes"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jarre\Desktop\WPI MCS Course Work\Spring 2023\CS534\Project\AIProject-DotsAndBoxes" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
@@ -61,5 +84,16 @@
       <updated>1679509570889</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

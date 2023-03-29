@@ -126,6 +126,6 @@ def check_win(board):
 
 
 if __name__ == '__main__':
-    board = read_gamestate("test_gamestate.txt")
+    board = read_gamestate("scenario1.txt")
     print_board(board)
     print(check_win(board))
