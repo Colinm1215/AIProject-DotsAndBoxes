@@ -7,15 +7,22 @@
 def read_gamestate(file_path):
     board = []
     f = open(file_path, "r")
+    i = 0
+    first_row_size = 0
     for x in f:
-        if not x or x == "" or x == "\n":
+        if x == "\n":
             continue
         row = []
         for c in x:
-            if not c or c == "" or c == "\n":
+            if c == "\n":
                 continue
             row.append(c)
+        while len(row) < first_row_size:
+            row.append(" ")
         board.append(row)
+        if i == 0:
+            i = 1
+            first_row_size = len(row)
     return board
 
 
@@ -122,7 +129,6 @@ def check_win(board):
             return 2
         else:
             return 3
-
 
 
 if __name__ == '__main__':
