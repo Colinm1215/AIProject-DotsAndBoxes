@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scenario1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario10-5.4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario11-5.5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario12-5.6.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario13-7.1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario14-7.2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario15-7.3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario3-3.3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario4-3.4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario5-3.5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario6-3.6.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario7-5.1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario8-5.2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenario9-5.3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
