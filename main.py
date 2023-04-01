@@ -51,6 +51,7 @@ def print_board(board):
 
 
 def place_move(board, player, move_r, move_c):
+    still_turn = False
     game_board = copy.deepcopy(board)
     if move_r % 2 == 0:
         if move_c % 2 == 0:
@@ -68,6 +69,7 @@ def place_move(board, player, move_r, move_c):
                         if col_right < len(game_board[move_r]):
                             if game_board[move_r - 1][col_right] == "|":
                                 game_board[move_r - 1][move_c] = player
+                                still_turn = True
         if row_below < len(game_board):
             if game_board[row_below][move_c] == "-":
                 col_left = move_c - 1
@@ -77,6 +79,7 @@ def place_move(board, player, move_r, move_c):
                         if col_right < len(game_board[move_r]):
                             if game_board[move_r + 1][col_right] == "|":
                                 game_board[move_r + 1][move_c] = player
+                                still_turn = True
     else:
         if move_c % 2 == 0:
             game_board[move_r][move_c] = "|"
@@ -93,6 +96,7 @@ def place_move(board, player, move_r, move_c):
                         if row_below < len(game_board):
                             if game_board[row_below][move_c - 1] == "-":
                                 game_board[move_r][move_c - 1] = player
+                                still_turn = True
         if col_right < len(game_board[move_r]):
             if game_board[move_r][col_right] == "|":
                 row_above = move_r-1
@@ -102,7 +106,8 @@ def place_move(board, player, move_r, move_c):
                         if row_below < len(game_board):
                             if game_board[row_below][move_c + 1] == "-":
                                 game_board[move_r][move_c + 1] = player
-    return game_board
+                                still_turn = True
+    return game_board, still_turn
 
 # returns 0 if board not finished
 # returns 1 if player 1 wins
@@ -186,8 +191,12 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
     if isMaximizingPlayer:
         best_value = float('-inf')
         for move in get_valid_moves(board):
-            new_board = place_move(board, player, move[0], move[1])
-            value = minimax(new_board, depth - 1, player, False, alpha, beta)
+            new_board, still_turn = place_move(board, player, move[0], move[1])
+            if still_turn:
+                value = minimax(new_board, depth - 1, player, True, alpha, beta)
+            else:
+                next_player = "2" if player == "1" else "1"
+                value = minimax(new_board, depth - 1, next_player, False, alpha, beta)
             best_value = max(best_value, value)
             alpha = max(alpha, best_value)
             if beta <= alpha:
@@ -196,8 +205,12 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
     else:
         best_value = float('inf')
         for move in get_valid_moves(board):
-            new_board = place_move(board, player, move[0], move[1])
-            value = minimax(new_board, depth - 1, player, True, alpha, beta)
+            new_board, still_turn = place_move(board, player, move[0], move[1])
+            if still_turn:
+                value = minimax(new_board, depth - 1, player, False, alpha, beta)
+            else:
+                next_player = "2" if player == "1" else "1"
+                value = minimax(new_board, depth - 1, next_player, True, alpha, beta)
             best_value = min(best_value, value)
             beta = min(beta, best_value)
             if beta <= alpha:
@@ -216,8 +229,12 @@ def get_best_move(board, depth, player):
         return move_list[0]
 
     for move in move_list:
-        new_board = place_move(game_board, player, move[0], move[1])
-        value = minimax(new_board, depth - 1, player, True, float('-inf'), float('inf'))
+        new_board, still_turn = place_move(game_board, player, move[0], move[1])
+        if still_turn:
+            value = minimax(new_board, depth - 1, player, True, float('-inf'), float('inf'))
+        else:
+            next_player = "2" if player == "1" else "1"
+            value = minimax(new_board, depth - 1, next_player, False, float('-inf'), float('inf'))
         if value > best_value:
             best_value = value
             best_move = move
@@ -248,10 +265,10 @@ if __name__ == '__main__':
             print("Player 1's turn!")
             player = "1"
         player_move = get_best_move(board, depth, player)
-        board = place_move(board, player, player_move[0], player_move[1])
-
+        board, still_turn = place_move(board, player, player_move[0], player_move[1])
         print_board(board)
         win_check = check_win(board)
+
         if (win_check > 0):
             done = True
         if (win_check == 1):
@@ -260,6 +277,7 @@ if __name__ == '__main__':
             print("Player 2 has won the game!")
         elif (win_check == 3):
             print("The game has been tied!")
-        turn += 1
+        if not still_turn:
+            turn += 1
 
 
