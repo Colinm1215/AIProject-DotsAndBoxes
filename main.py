@@ -1,11 +1,7 @@
-# This is a sample Python script.
 import copy
+import time
 
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
+# Reads in a given scenario game state.
 def read_gamestate(file_path):
     board = []
     f = open(file_path, "r")
@@ -27,7 +23,7 @@ def read_gamestate(file_path):
             first_row_size = len(row)
     return board
 
-
+# Creates a new gamestate of a size selected by the user. Used if no scenario is given.
 def create_gameboard(size):
     size = size*2 + 1
     board = [[" "] * size for i in range(size)]
@@ -40,7 +36,7 @@ def create_gameboard(size):
         i += 2
     return board
 
-
+# Prints the game board.
 def print_board(board):
     for r in board:
         str = ""
@@ -49,7 +45,7 @@ def print_board(board):
         print(str)
     print()
 
-
+# Checks if moves are valid and how they should be made (horizontal or vertical). Adds player # to completed boxes.
 def place_move(board, player, move_r, move_c):
     still_turn = False
     game_board = copy.deepcopy(board)
@@ -109,10 +105,11 @@ def place_move(board, player, move_r, move_c):
                                 still_turn = True
     return game_board, still_turn
 
-# returns 0 if board not finished
-# returns 1 if player 1 wins
-# returns 2 if player 2 wins
-# returns 3 if a tie occurs
+# Checks if the game is finished and if so, who the winner is.
+    # Returns 0 if board not finished.
+    # Returns 1 if player 1 wins.
+    # Returns 2 if player 2 wins.
+    # Returns 3 if a tie occurs.
 def check_win(board):
     size = (len(board)-1)/2
     r = 1
@@ -143,7 +140,7 @@ def check_win(board):
         else:
             return 3
 
-
+# Evaluates the current score of the game.
 def evaluate(board, player):
     player1_count = 0
     player2_count = 0
@@ -167,7 +164,7 @@ def evaluate(board, player):
     else:
         return player2_count - player1_count
 
-
+# Returns all remaining valid moves available to a player.
 def get_valid_moves(board):
     validMoves = []
     for row in range(len(board)):
@@ -182,7 +179,7 @@ def get_valid_moves(board):
                         validMoves.append([row,col])
     return validMoves
 
-
+# MiniMax algorithm.
 def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
     win_check = check_win(board)
     if depth == 0 or (win_check == 1 or win_check == 2):
@@ -217,7 +214,7 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
                 break
         return best_value
 
-
+# Selects the best move from the list of available valid moves using the MiniMax algorithm.
 def get_best_move(board, depth, player):
     game_board = copy.deepcopy(board)
     best_move = None
@@ -241,10 +238,18 @@ def get_best_move(board, depth, player):
 
     return best_move
 
-
+# The program begins by allowing the user to choose from a scenario gamestate or select a new gamestate (a new game).
+# If a scenario is given, the user inputs the current turn for the given scenario.
+# If a new game is selected, the user enters the board size.
+# Finally, the user selects the max_depth the MiniMax algorithm should use during move selection.
+# The game is then played out between two AI players.
+# The game board is printed after each turn.
+# The board is evaluated after each turn to determine if it is over. If so, a result is displayed.
+# The time of each turn and overall game is tracked.
 if __name__ == '__main__':
     inp = input("Please enter the name of the gamestate file to read in, or enter \"new gamestate\" : ")
     board = []
+    turn_inp = input("Scenario Testing - Enter current turn number or enter 'no': ")
     if inp == "new gamestate":
         size = int(input("Please enter the size of the new board : "))
         board = create_gameboard(size)
@@ -253,11 +258,15 @@ if __name__ == '__main__':
 
     depth = int(input("At what max_depth should the minimax algorithm search to find a move? : "))
     done = False
-    turn = 1
-
+    if turn_inp == 'no':
+        turn = 1
+    else:
+        turn = int(turn_inp)
     print_board(board)
+    game_start = time.perf_counter()
 
     while not done:
+        turn_start = time.perf_counter()
         if turn % 2 == 0:
             player = "2"
             print("Player 2's turn!")
@@ -267,6 +276,9 @@ if __name__ == '__main__':
         player_move = get_best_move(board, depth, player)
         board, still_turn = place_move(board, player, player_move[0], player_move[1])
         print_board(board)
+        turn_end = time.perf_counter()
+        turn_time = round((turn_end - turn_start),4)
+        print('Turn time: '+ str(turn_time) + ' seconds' + '\n')
         win_check = check_win(board)
 
         if (win_check > 0):
@@ -280,4 +292,7 @@ if __name__ == '__main__':
         if not still_turn:
             turn += 1
 
+    game_end = time.perf_counter()
+    game_time = round((game_end - game_start),3)
+    print('Game time: ' + str(game_time) + ' seconds' + '\n')
 
