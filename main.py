@@ -11,8 +11,7 @@ def read_gamestate(file_path):
     first_row = f.readline()
     board = create_gameboard(len(first_row) - 1)
     global completed_boxes
-    completed_boxes = [[0] *(len(first_row) - 1) for i in range((len(first_row) - 1))]
-    print(board)
+    completed_boxes = [[0] * (len(first_row) - 1) for i in range((len(first_row) - 1))]
     f = open(file_path, "r")
     row = 0
     col = 0
@@ -51,85 +50,100 @@ def create_gameboard(size):
 # Prints the game board.
 def print_board(board):
     o_size = len(board[0])
-    for r in range(len(board)):
-        if len(board[r]) == len(board[0]):
+    for row in range(len(board)):
+        if len(board[row]) == len(board[0]):
             type = "row"
             stri = "O"
         else:
             type = "col"
             stri = ""
-        for i in range(len(board[r])):
-            if board[r][i] == 1:
+        for col in range(len(board[row])):
+            if board[row][col] == 1:
                 if type == "row":
                     stri += "-O"
                 else:
-                    if i > len(completed_boxes[0]) or r > len(completed_boxes):
-                        stri += "| "
-                        continue
-                    c_box_index_r = r-1
-                    c_box_index_c = i
-                    if c_box_index_r < 0:
-                        c_box_index_r = 0
-                    if completed_boxes[c_box_index_r][c_box_index_c] == 0:
-                        stri += "| "
+                    if col <= len(board[row]) - 2:
+                        if completed_boxes[(row - 1) // 2][col] == 0:
+                            stri += "| "
+                        else:
+                            stri += "|" + str(completed_boxes[(row - 1) // 2][col])
                     else:
-                        stri += "|" + str(completed_boxes[c_box_index_r][c_box_index_c])
+                        stri += "|"
             else:
                 if type == "row":
                     stri += " O"
                 else:
                     stri += "  "
-
         print(stri)
     print()
 
-def check_completed_box(board, move_r, move_c, player):
+
+def check_completed_box(board, move_r, move_c, player, pri):
+    global completed_boxes
+    completed_boxes_temp = copy.deepcopy(completed_boxes)
+    still_turn = False
+    # Check if the current move is on a horizontal line
     if move_r % 2 == 0:
+        # Check if there's a row above the current move
         if move_r > 0:
+            # Check if there's a completed box above the current move
             if (
-                    board[move_r - 1][move_c] == 1
-                    and board[move_r - 1][move_c - 1] == 1
-                    and board[move_r - 2][move_c] == 1
+                    board[move_r - 1][move_c + 1] == 1  # Line to the right and above the current move
+                    and board[move_r - 1][move_c] == 1  # Line above the current move
+                    and board[move_r - 2][move_c] == 1  # Line to the left and above the current move
             ):
-                completed_boxes[(move_r - 2) // 2][(move_c) // 2] = player
-
+                # Update the completed_boxes entry for the box above the current move
+                completed_boxes_temp[(move_r - 2) // 2][move_c] = player
+                still_turn = True
+        # Check if there's a row below the current move
         if move_r < len(board) - 2:
+            # Check if there's a completed box below the current move
             if (
-                    board[move_r + 1][move_c] == 1
-                    and board[move_r + 1][move_c - 1] == 1
-                    and board[move_r + 2][move_c] == 1
+                    board[move_r + 1][move_c + 1] == 1  # Line to the right and below the current move
+                    and board[move_r + 1][move_c] == 1  # Line below the current move
+                    and board[move_r + 2][move_c] == 1  # Line to the left and below the current move
             ):
-                completed_boxes[move_r // 2][(move_c) // 2] = player
-
+                # Update the completed_boxes entry for the box below the current move
+                completed_boxes_temp[move_r // 2][move_c] = player
+                still_turn = True
+    # Check if the current move is on a vertical line
     elif move_r % 2 != 0:
+        # Check if there's a column to the left of the current move
         if move_c > 0:
+            # Check if there's a completed box to the left of the current move
             if (
-                    board[move_r][move_c - 2] == 1
-                    and board[move_r - 1][move_c - 1] == 1
-                    and board[move_r + 1][move_c - 1] == 1
+                    board[move_r][move_c - 1] == 1  # Line to the left of the current move
+                    and board[move_r - 1][move_c - 1] == 1  # Line above and to the left of the current move
+                    and board[move_r + 1][move_c - 1] == 1  # Line below and to the left of the current move
             ):
-                completed_boxes[(move_r - 1) // 2][(move_c - 2) // 2] = player
+                # Update the completed_boxes entry for the box to the left of the current move
+                completed_boxes_temp[(move_r - 1) // 2][move_c-1] = player
+                still_turn = True
+        # Check if there's a column to the right of the current move
+        if move_c <= len(board[move_r]) - 2:
+            # Check if there's a completed box to the right of the current move
+            if (
+                    board[move_r][move_c + 1] == 1  # Line to the right of the current move
+                    and board[move_r - 1][move_c] == 1  # Line above and to the right of the current move
+                    and board[move_r + 1][move_c] == 1  # Line below and to the right of the current move
+            ):
+                # Update the completed_boxes entry for the box to the right of the current move
+                completed_boxes_temp[(move_r - 1) // 2][move_c] = player
+                still_turn = True
 
-        if move_c < len(board[0]) - 2:
-            if (
-                    board[move_r][move_c + 2] == 1
-                    and board[move_r - 1][move_c + 1] == 1
-                    and board[move_r + 1][move_c + 1] == 1
-            ):
-                completed_boxes[(move_r - 1) // 2][move_c // 2] = player
+    if pri:
+        completed_boxes = completed_boxes_temp
+    return still_turn
 
 
 # Checks if moves are valid and how they should be made (horizontal or vertical). Adds player # to completed boxes.
-def place_move(board, player, move_r, move_c):
+def place_move(board, player, move_r, move_c, print):
     global completed_boxes
     game_board = copy.deepcopy(board)
     game_board[move_r][move_c] = 1
-    print(game_board)
 
-    still_turn = check_completed_box(board, move_r, move_c, int(player))
-    print(completed_boxes)
-    return game_board
-
+    still_turn = check_completed_box(board, move_r, move_c, int(player), print)
+    return game_board, still_turn
 
 
 # Checks if the game is finished and if so, who the winner is.
@@ -176,20 +190,12 @@ def evaluate(board, player):
     if check_win(board) == 3:
         return 0
 
-    for row in range(len(board)):
-        for col in range(len(board[0])):
-            if (row % 2 != 0):
-                if (col % 2 != 0):
-                    if board[row][col] == "1":
-                        player1_count += 1
-                    elif board[row][col] == "2":
-                        player2_count += 1
-            else:
-                if (col % 2 == 0):
-                    if board[row][col] == "1":
-                        player1_count += 1
-                    elif board[row][col] == "2":
-                        player2_count += 1
+    for row in completed_boxes:
+        for col in row:
+            if col == 1:
+                player1_count += 1
+            elif col == 2:
+                player2_count += 1
 
     if player == "1":
         return player1_count - player2_count
@@ -200,16 +206,10 @@ def evaluate(board, player):
 # Returns all remaining valid moves available to a player.
 def get_valid_moves(board):
     validMoves = []
-    for row in range(len(board)):
-        for col in range(len(board[row])):
-            if (row % 2 == 0):
-                if (col % 2 != 0):
-                    if board[row][col] == 0:
-                        validMoves.append([row, col])
-            else:
-                if (col % 2 == 0):
-                    if board[row][col] == 0:
-                        validMoves.append([row, col])
+    for r in range(len(board)):
+        for c in range(len(board[r])):
+            if board[r][c] == 0:
+                validMoves.append([r,c])
     return validMoves
 
 
@@ -222,7 +222,7 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
     if isMaximizingPlayer:
         best_value = float('-inf')
         for move in get_valid_moves(board):
-            new_board, still_turn = place_move(board, player, move[0], move[1])
+            new_board, still_turn = place_move(board, player, move[0], move[1], False)
             if still_turn:
                 value = minimax(new_board, depth - 1, player, True, alpha, beta)
             else:
@@ -236,7 +236,7 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
     else:
         best_value = float('inf')
         for move in get_valid_moves(board):
-            new_board, still_turn = place_move(board, player, move[0], move[1])
+            new_board, still_turn = place_move(board, player, move[0], move[1], False)
             if still_turn:
                 value = minimax(new_board, depth - 1, player, False, alpha, beta)
             else:
@@ -261,17 +261,27 @@ def get_best_move(board, depth, player):
         return move_list[0]
 
     for move in move_list:
-        new_board, still_turn = place_move(game_board, player, move[0], move[1])
+        new_board, still_turn = place_move(game_board, player, move[0], move[1], False)
         if still_turn:
             value = minimax(new_board, depth - 1, player, True, float('-inf'), float('inf'))
         else:
             next_player = 2 if player == 1 else 1
             value = minimax(new_board, depth - 1, next_player, False, float('-inf'), float('inf'))
-        if value > best_value:
+        if value >= best_value:
             best_value = value
             best_move = move
 
     return best_move
+
+
+def in_valid_moves(move_r, move_c, game_board):
+    valid_moves = get_valid_moves(game_board)
+    valid = False
+    for move in valid_moves:
+        if move_r == move[0] and move_c == move[1]:
+            valid = True
+
+    return valid
 
 
 # The program begins by allowing the user to choose from a scenario gamestate or select a new gamestate (a new game).
@@ -310,18 +320,18 @@ if __name__ == '__main__':
         else:
             print("Player 1's turn!")
             player = "1"
-        player_move_row = int(input("Enter Move Row : "))
-        player_move_col = int(input("Enter Move Col : "))
-        valid_moves = get_valid_moves(board)
-        in_valid_moves = False
-        for move in valid_moves:
-            if player_move_row == move[0] and player_move_col == move[1]:
-                in_valid_moves = True
-        if in_valid_moves:
-            print("move valid")
-        board = place_move(board, player, player_move_row, player_move_col)
+        # player_move_row = int(input("Enter Move Row : "))
+        # player_move_col = int(input("Enter Move Col : "))
+        # while not in_valid_moves(player_move_row, player_move_col, board):
+        #     print("Invalid Move")
+        #     player_move_row = int(input("Enter Move Row : "))
+        #     player_move_col = int(input("Enter Move Col : "))
+        move = get_best_move(board, depth, player)
+        player_move_row = move[0]
+        player_move_col = move[1]
+        print("Placing at ", move)
+        board, still_turn = place_move(board, player, player_move_row, player_move_col, True)
         print_board(board)
-        still_turn = False
         turn_end = time.perf_counter()
         turn_time = round((turn_end - turn_start), 4)
         print('Turn time: ' + str(turn_time) + ' seconds' + '\n')
