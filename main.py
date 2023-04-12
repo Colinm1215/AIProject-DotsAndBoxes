@@ -1,5 +1,6 @@
 import copy
 import time
+import random
 
 global completed_boxes
 
@@ -142,7 +143,7 @@ def place_move(board, player, move_r, move_c, print):
     game_board = copy.deepcopy(board)
     game_board[move_r][move_c] = 1
 
-    still_turn = check_completed_box(board, move_r, move_c, int(player), print)
+    still_turn = check_completed_box(board, move_r, move_c, player, print)
     return game_board, still_turn
 
 
@@ -178,12 +179,12 @@ def evaluate(board, player):
     player1_count = 0
     player2_count = 0
     if check_win(board) == 1:
-        if player == "1":
+        if player == 1:
             return float('inf')
         else:
             return float('-inf')
     if check_win(board) == 2:
-        if player == "2":
+        if player == 2:
             return float('inf')
         else:
             return float('-inf')
@@ -197,7 +198,7 @@ def evaluate(board, player):
             elif col == 2:
                 player2_count += 1
 
-    if player == "1":
+    if player == 1:
         return player1_count - player2_count
     else:
         return player2_count - player1_count
@@ -226,7 +227,7 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
             if still_turn:
                 value = minimax(new_board, depth - 1, player, True, alpha, beta)
             else:
-                next_player = "2" if player == "1" else "1"
+                next_player = 2 if player == 1 else 1
                 value = minimax(new_board, depth - 1, next_player, False, alpha, beta)
             best_value = max(best_value, value)
             alpha = max(alpha, best_value)
@@ -240,7 +241,7 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
             if still_turn:
                 value = minimax(new_board, depth - 1, player, False, alpha, beta)
             else:
-                next_player = "2" if player == "1" else "1"
+                next_player = 2 if player == 1 else 1
                 value = minimax(new_board, depth - 1, next_player, True, alpha, beta)
             best_value = min(best_value, value)
             beta = min(beta, best_value)
@@ -250,7 +251,7 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
 
 
 # Selects the best move from the list of available valid moves using the MiniMax algorithm.
-def get_best_move(board, depth, player):
+def get_best_move_minimax(board, depth, player):
     game_board = copy.deepcopy(board)
     best_move = None
     best_value = float('-inf')
@@ -284,6 +285,108 @@ def in_valid_moves(move_r, move_c, game_board):
     return valid
 
 
+# Simulates a random playout from the current game board until the game ends
+def simulate(board, player):
+    # Continue simulating moves while the game is ongoing
+    while check_win(board) == 0:
+        # Get a list of valid moves
+        valid_moves = get_valid_moves(board)
+        # Select a random move from the list of valid moves
+        if len(valid_moves) == 1:
+            return valid_moves[0]
+        random_move = random.choice(valid_moves)
+        # Extract row and column from the selected move
+        move_r, move_c = random_move
+        # Place the move on the board without checking for a win
+        board, _ = place_move(board, player, move_r, move_c, False)
+        # Switch to the other player
+        player = 2 if player == 1 else 1
+    # Return the game result (1, 2, or 3)
+    return check_win(board)
+
+
+# Monte Carlo Tree Search function
+def mcts(board, player, num_simulations):
+    # Initialize the best move and best score
+    best_move = None
+    best_score = float('-inf')
+
+    # Get a list of valid moves
+    valid_moves = get_valid_moves(board)
+
+    # If there's only one valid move, return it immediately
+    if len(valid_moves) == 1:
+        return valid_moves[0]
+
+    # Loop through all valid moves
+    for move in valid_moves:
+        # Extract row and column from the current move
+        move_r, move_c = move
+        # Place the move on a copy of the board without checking for a win
+        new_board, _ = place_move(copy.deepcopy(board), player, move_r, move_c, False)
+        # Initialize the number of wins for this move
+        wins = 0
+
+        # Perform a specified number of simulations for this move
+        for _ in range(num_simulations):
+            # Simulate a random playout and get the game result
+            simulation_result = simulate(copy.deepcopy(new_board), player)
+            # If the result is a win for the current player, increment the wins counter
+            if simulation_result == player:
+                wins += 1
+
+        # Calculate the win rate for this move
+        win_rate = wins / num_simulations
+
+        # If the win rate is higher than the current best score, update the best move and best score
+        if win_rate > best_score:
+            best_score = win_rate
+            best_move = move
+
+    # Return the best move found
+    return best_move
+
+
+def perform_turn_manual(board, player):
+    player_move_row = int(input("Enter Move Row : "))
+    player_move_col = int(input("Enter Move Col : "))
+    while not in_valid_moves(player_move_row, player_move_col, board):
+      print("Invalid Move")
+      player_move_row = int(input("Enter Move Row : "))
+      player_move_col = int(input("Enter Move Col : "))
+
+    print("Placing at ", [player_move_row, player_move_col])
+    return place_move(board, player, player_move_row, player_move_col, True)
+
+
+def perform_turn_minimax(board, player, depth):
+    move = get_best_move_minimax(board, depth, player)
+
+    print("Placing at ", move)
+    return place_move(board, player, move[0], move[1], True)
+
+
+def perform_turn_mcts(board, player, depth):
+    move = mcts(board, player, depth)
+
+    print("Placing at ", move)
+    return place_move(board, player, move[0], move[1], True)
+
+
+def switch_for_turn_type(board, player, depth, type):
+    if type == "minimax":
+        return perform_turn_minimax(board, player, depth)
+    elif type == "mcts":
+        return perform_turn_mcts(board, player, depth)
+    elif type == "manual":
+        return perform_turn_manual(board, player)
+    else:
+        return None, False
+
+
+
+
+
 # The program begins by allowing the user to choose from a scenario gamestate or select a new gamestate (a new game).
 # If a scenario is given, the user inputs the current turn for the given scenario.
 # If a new game is selected, the user enters the board size.
@@ -303,7 +406,34 @@ if __name__ == '__main__':
         turn_inp = input("Scenario Testing - Enter current turn number or enter 'no': ")
         board = read_gamestate(inp)
 
-    depth = int(input("At what max_depth should the minimax algorithm search to find a move? : "))
+    player1_type = "none"
+    depth_player1 = 0
+    while player1_type == "none":
+        player1_type = input("Please enter player 1's play type [manual, minimax, mcts] : ")
+        if player1_type == "minimax":
+            depth_player1 = int(input("At what max_depth should the minimax algorithm search to find a move? : "))
+        elif player1_type == "mcts":
+            depth_player1 = int(input("How many simulations should MCTS use to find a move? : "))
+        elif player1_type == "manual":
+            continue
+        else:
+            print("Invalid Type")
+            player1_type = "none"
+
+    player2_type = "none"
+    depth_player2 = 0
+    while player2_type == "none":
+        player2_type = input("Please enter player 1's play type [manual, minimax, mcts] : ")
+        if player2_type == "minimax":
+            depth_player2 = int(input("At what max_depth should the minimax algorithm search to find a move? : "))
+        elif player2_type == "mcts":
+            depth_player2 = int(input("How many simulations should MCTS use to find a move? : "))
+        elif player2_type == "manual":
+            continue
+        else:
+            print("Invalid Type")
+            player2_type = "none"
+
     done = False
     if turn_inp == 'no':
         turn = 1
@@ -315,22 +445,12 @@ if __name__ == '__main__':
     while not done:
         turn_start = time.perf_counter()
         if turn % 2 == 0:
-            player = "2"
             print("Player 2's turn!")
+            board, still_turn = switch_for_turn_type(board, 2, depth_player2, player2_type)
         else:
             print("Player 1's turn!")
-            player = "1"
-        # player_move_row = int(input("Enter Move Row : "))
-        # player_move_col = int(input("Enter Move Col : "))
-        # while not in_valid_moves(player_move_row, player_move_col, board):
-        #     print("Invalid Move")
-        #     player_move_row = int(input("Enter Move Row : "))
-        #     player_move_col = int(input("Enter Move Col : "))
-        move = get_best_move(board, depth, player)
-        player_move_row = move[0]
-        player_move_col = move[1]
-        print("Placing at ", move)
-        board, still_turn = place_move(board, player, player_move_row, player_move_col, True)
+            board, still_turn = switch_for_turn_type(board, 1, depth_player1, player1_type)
+
         print_board(board)
         turn_end = time.perf_counter()
         turn_time = round((turn_end - turn_start), 4)
