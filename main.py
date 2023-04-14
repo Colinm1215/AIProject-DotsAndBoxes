@@ -7,12 +7,11 @@ global completed_boxes
 
 # Reads in a given scenario game state.
 def read_gamestate(file_path):
-    board = []
     f = open(file_path, "r")
     first_row = f.readline()
-    board = create_gameboard(len(first_row) - 1)
+    board = create_gameboard(len(first_row) - 2)
     global completed_boxes
-    completed_boxes = [[0] * (len(first_row) - 1) for i in range((len(first_row) - 1))]
+    completed_boxes = [[0] * (len(first_row) - 2) for i in range((len(first_row) - 2))]
     f = open(file_path, "r")
     row = 0
     col = 0
@@ -21,6 +20,11 @@ def read_gamestate(file_path):
             continue
         x = x.strip("\n")
         for c in x:
+            if row % 2 == 0:
+                if row == len(board):
+                    continue
+                if col == len(board[0]):
+                    continue
             if c == "\n":
                 continue
             if c == "1":
@@ -28,8 +32,10 @@ def read_gamestate(file_path):
             else:
                 board[row][col] = 0
             col += 1
+            print_board(board)
         col = 0
         row += 1
+
     return board
 
 
