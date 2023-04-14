@@ -429,7 +429,7 @@ if __name__ == '__main__':
     player2_type = "none"
     depth_player2 = 0
     while player2_type == "none":
-        player2_type = input("Please enter player 1's play type [manual, minimax, mcts] : ")
+        player2_type = input("Please enter player 2's play type [manual, minimax, mcts] : ")
         if player2_type == "minimax":
             depth_player2 = int(input("At what max_depth should the minimax algorithm search to find a move? : "))
         elif player2_type == "mcts":
