@@ -32,7 +32,8 @@ def read_gamestate(file_path):
             else:
                 board[row][col] = 0
             col += 1
-            print_board(board)
+            #Shouldn't be needed
+            #print_board(board)
         col = 0
         row += 1
 

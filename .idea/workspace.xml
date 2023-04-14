@@ -8,8 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scenario1-3.1-matrix.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario2-3.2-matrix.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario3-3.3-matrix.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario4-3.4-matrix.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario5-3.5-matrix.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenario6-3.6-matrix.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenario1-3.1-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenario1-3.1-matrix.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenario1-3.1_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenario1-3.1_2.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,18 +34,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/colin/Desktop/AIProject-DotsAndBoxes&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/jarre/Desktop/WPI MCS Course Work/Spring 2023/CS534/Project/AIProject-DotsAndBoxes",
+    "run.code.analysis.last.selected.profile": "aDefault"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\colin\Desktop\AIProject-DotsAndBoxes" />
       <recent name="C:\Users\jarre\Desktop\WPI MCS Course Work\Spring 2023\CS534\Project\AIProject-DotsAndBoxes" />
+      <recent name="C:\Users\colin\Desktop\AIProject-DotsAndBoxes" />
     </key>
   </component>
   <component name="RunManager">
