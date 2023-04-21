@@ -160,11 +160,11 @@ def place_move(board, player, move_r, move_c, print):
 # Returns 1 if player 1 wins.
 # Returns 2 if player 2 wins.
 # Returns 3 if a tie occurs.
-def check_win(board):
+def check_win(board, completed_boxes_temp):
     size = (len(board) - 1) / 2
     player1_count = 0
     player2_count = 0
-    for row in completed_boxes:
+    for row in completed_boxes_temp:
         for box in row:
             if box == 1:
                 player1_count += 1
@@ -212,7 +212,7 @@ def get_valid_moves(board):
 
 # MiniMax algorithm.
 def minimax(board, depth, player, isMaximizingPlayer, alpha, beta, completed_boxes_temp):
-    win_check = check_win(board)
+    win_check = check_win(board, completed_boxes_temp)
     if depth == 0 or (win_check == 1 or win_check == 2):
         return evaluate(player, completed_boxes_temp)
 
@@ -285,24 +285,28 @@ def in_valid_moves(move_r, move_c, game_board):
 
 
 # Simulates a random playout from the current game board until the game ends
-def simulate(board, player):
+def simulate(board, player, completed_boxes_temp):
     # Continue simulating moves while the game is ongoing
-    while check_win(board) == 0:
+    while check_win(board, completed_boxes_temp) == 0:
         # Get a list of valid moves
         valid_moves = get_valid_moves(board)
         # Select a random move from the list of valid moves
-        if len(valid_moves) == 1:
-            return valid_moves[0]
-        random_move = random.choice(valid_moves)
+        if len(valid_moves) > 1:
+            random_move = random.choice(valid_moves)
+        elif len(valid_moves) == 1:
+            random_move = valid_moves[0]
+        else:
+            return check_win(board, completed_boxes_temp)
         # Extract row and column from the selected move
-        move_r, move_c = random_move
+        move_r = random_move[0]
+        move_c = random_move[1]
         # Place the move on the board without checking for a win
         board, still_turn, completed_boxes_temp = place_move(board, player, move_r, move_c, False)
         # Switch to the other player
         player = 1 if player == 1 and still_turn else 2
         player = 2 if player == 2 and still_turn else 1
     # Return the game result (1, 2, or 3)
-    return check_win(board)
+    return check_win(board, completed_boxes_temp)
 
 
 # Monte Carlo Tree Search function
@@ -321,7 +325,8 @@ def mcts(board, player, num_simulations):
     # Loop through all valid moves
     for move in valid_moves:
         # Extract row and column from the current move
-        move_r, move_c = move
+        move_r = move[0]
+        move_c = move[1]
         # Place the move on a copy of the board without checking for a win
         new_board, still_turn, completed_boxes_temp = place_move(copy.deepcopy(board), player, move_r, move_c, False)
         # Initialize the number of wins for this move
@@ -330,7 +335,7 @@ def mcts(board, player, num_simulations):
         # Perform a specified number of simulations for this move
         for _ in range(num_simulations):
             # Simulate a random playout and get the game result
-            simulation_result = simulate(copy.deepcopy(new_board), player)
+            simulation_result = simulate(copy.deepcopy(new_board), player, completed_boxes_temp)
             # If the result is a win for the current player, increment the wins counter
             if simulation_result == player:
                 wins += 1
@@ -455,7 +460,7 @@ if __name__ == '__main__':
         turn_end = time.perf_counter()
         turn_time = round((turn_end - turn_start), 4)
         print('Turn time: ' + str(turn_time) + ' seconds' + '\n')
-        win_check = check_win(board)
+        win_check = check_win(board, completed_boxes)
 
         if (win_check > 0):
             done = True
