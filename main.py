@@ -141,17 +141,18 @@ def check_completed_box(board, move_r, move_c, player, pri):
 
     if pri:
         completed_boxes = completed_boxes_temp
-    return still_turn
+        return still_turn, completed_boxes
+    else:
+        return still_turn, completed_boxes_temp
 
 
 # Checks if moves are valid and how they should be made (horizontal or vertical). Adds player # to completed boxes.
 def place_move(board, player, move_r, move_c, print):
-    global completed_boxes
     game_board = copy.deepcopy(board)
     game_board[move_r][move_c] = 1
 
-    still_turn = check_completed_box(board, move_r, move_c, player, print)
-    return game_board, still_turn
+    still_turn, completed_boxes_temp = check_completed_box(board, move_r, move_c, player, print)
+    return game_board, still_turn, completed_boxes_temp
 
 
 # Checks if the game is finished and if so, who the winner is.
@@ -182,23 +183,11 @@ def check_win(board):
 
 
 # Evaluates the current score of the game.
-def evaluate(board, player):
+def evaluate(player, completed_boxes_temp):
     player1_count = 0
     player2_count = 0
-    if check_win(board) == 1:
-        if player == 1:
-            return float('inf')
-        else:
-            return float('-inf')
-    if check_win(board) == 2:
-        if player == 2:
-            return float('inf')
-        else:
-            return float('-inf')
-    if check_win(board) == 3:
-        return 0
 
-    for row in completed_boxes:
+    for row in completed_boxes_temp:
         for col in row:
             if col == 1:
                 player1_count += 1
@@ -222,20 +211,23 @@ def get_valid_moves(board):
 
 
 # MiniMax algorithm.
-def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
+def minimax(board, depth, player, isMaximizingPlayer, alpha, beta, completed_boxes_temp):
     win_check = check_win(board)
     if depth == 0 or (win_check == 1 or win_check == 2):
-        return evaluate(board, player)
+        return evaluate(player, completed_boxes_temp)
+
+
+    move_list = get_valid_moves(board)
 
     if isMaximizingPlayer:
         best_value = float('-inf')
-        for move in get_valid_moves(board):
-            new_board, still_turn = place_move(board, player, move[0], move[1], False)
+        for move in move_list:
+            new_board, still_turn, completed_boxes_temp = place_move(board, player, move[0], move[1], False)
             if still_turn:
-                value = minimax(new_board, depth - 1, player, True, alpha, beta)
+                value = minimax(new_board, depth - 1, player, True, alpha, beta, completed_boxes_temp)
             else:
                 next_player = 2 if player == 1 else 1
-                value = minimax(new_board, depth - 1, next_player, False, alpha, beta)
+                value = minimax(new_board, depth - 1, next_player, False, alpha, beta, completed_boxes_temp)
             best_value = max(best_value, value)
             alpha = max(alpha, best_value)
             if beta <= alpha:
@@ -243,13 +235,13 @@ def minimax(board, depth, player, isMaximizingPlayer, alpha, beta):
         return best_value
     else:
         best_value = float('inf')
-        for move in get_valid_moves(board):
-            new_board, still_turn = place_move(board, player, move[0], move[1], False)
+        for move in move_list:
+            new_board, still_turn, completed_boxes_temp = place_move(board, player, move[0], move[1], False)
             if still_turn:
-                value = minimax(new_board, depth - 1, player, False, alpha, beta)
+                value = minimax(new_board, depth - 1, player, False, alpha, beta, completed_boxes_temp)
             else:
                 next_player = 2 if player == 1 else 1
-                value = minimax(new_board, depth - 1, next_player, True, alpha, beta)
+                value = minimax(new_board, depth - 1, next_player, True, alpha, beta, completed_boxes_temp)
             best_value = min(best_value, value)
             beta = min(beta, best_value)
             if beta <= alpha:
@@ -269,12 +261,12 @@ def get_best_move_minimax(board, depth, player):
         return move_list[0]
 
     for move in move_list:
-        new_board, still_turn = place_move(game_board, player, move[0], move[1], False)
+        new_board, still_turn, completed_boxes_temp = place_move(game_board, player, move[0], move[1], False)
         if still_turn:
-            value = minimax(new_board, depth - 1, player, True, float('-inf'), float('inf'))
+            value = minimax(new_board, depth - 1, player, True, float('-inf'), float('inf'), completed_boxes_temp)
         else:
             next_player = 2 if player == 1 else 1
-            value = minimax(new_board, depth - 1, next_player, False, float('-inf'), float('inf'))
+            value = minimax(new_board, depth - 1, next_player, False, float('-inf'), float('inf'), completed_boxes_temp)
         if value >= best_value:
             best_value = value
             best_move = move
@@ -305,9 +297,10 @@ def simulate(board, player):
         # Extract row and column from the selected move
         move_r, move_c = random_move
         # Place the move on the board without checking for a win
-        board, _ = place_move(board, player, move_r, move_c, False)
+        board, still_turn, completed_boxes_temp = place_move(board, player, move_r, move_c, False)
         # Switch to the other player
-        player = 2 if player == 1 else 1
+        player = 1 if player == 1 and still_turn else 2
+        player = 2 if player == 2 and still_turn else 1
     # Return the game result (1, 2, or 3)
     return check_win(board)
 
@@ -330,7 +323,7 @@ def mcts(board, player, num_simulations):
         # Extract row and column from the current move
         move_r, move_c = move
         # Place the move on a copy of the board without checking for a win
-        new_board, _ = place_move(copy.deepcopy(board), player, move_r, move_c, False)
+        new_board, still_turn, completed_boxes_temp = place_move(copy.deepcopy(board), player, move_r, move_c, False)
         # Initialize the number of wins for this move
         wins = 0
 
@@ -453,10 +446,10 @@ if __name__ == '__main__':
         turn_start = time.perf_counter()
         if turn % 2 == 0:
             print("Player 2's turn!")
-            board, still_turn = switch_for_turn_type(board, 2, depth_player2, player2_type)
+            board, still_turn, completed_boxes_temp = switch_for_turn_type(board, 2, depth_player2, player2_type)
         else:
             print("Player 1's turn!")
-            board, still_turn = switch_for_turn_type(board, 1, depth_player1, player1_type)
+            board, still_turn, completed_boxes_temp = switch_for_turn_type(board, 1, depth_player1, player1_type)
 
         print_board(board)
         turn_end = time.perf_counter()
