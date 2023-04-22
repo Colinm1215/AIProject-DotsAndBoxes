@@ -214,6 +214,8 @@ def get_valid_moves(board):
 def minimax(board, depth, player, isMaximizingPlayer, alpha, beta, completed_boxes_temp):
     win_check = check_win(board, completed_boxes_temp)
     if depth == 0 or (win_check == 1 or win_check == 2):
+        if (win_check == 1 or win_check == 2):
+            return float('inf')
         return evaluate(player, completed_boxes_temp)
 
 
@@ -257,16 +259,14 @@ def get_best_move_minimax(board, depth, player):
 
     move_list = get_valid_moves(game_board)
 
-    if len(move_list) == 1:
-        return move_list[0]
-
     for move in move_list:
         new_board, still_turn, completed_boxes_temp = place_move(game_board, player, move[0], move[1], False)
         if still_turn:
-            value = minimax(new_board, depth - 1, player, True, float('-inf'), float('inf'), completed_boxes_temp)
+            value = evaluate(player, completed_boxes_temp)
+            value += minimax(new_board, depth - 1, player, True, float('-inf'), float('inf'), completed_boxes_temp)
         else:
-            next_player = 2 if player == 1 else 1
-            value = minimax(new_board, depth - 1, next_player, False, float('-inf'), float('inf'), completed_boxes_temp)
+            player = 2 if player == 1 else 1
+            value = minimax(new_board, depth - 1, player, False, float('-inf'), float('inf'), completed_boxes_temp)
         if value >= best_value:
             best_value = value
             best_move = move
@@ -387,10 +387,6 @@ def switch_for_turn_type(board, player, depth, type):
         return perform_turn_manual(board, player)
     else:
         return None, False
-
-
-
-
 
 # The program begins by allowing the user to choose from a scenario gamestate or select a new gamestate (a new game).
 # If a scenario is given, the user inputs the current turn for the given scenario.
