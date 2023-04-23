@@ -56,7 +56,9 @@ def create_gameboard(size):
 
 
 # Prints the game board.
-def print_board(board):
+def print_board(board, completed_boxes_temp=None):
+    if completed_boxes_temp is None:
+        completed_boxes_temp = completed_boxes
     o_size = len(board[0])
     for row in range(len(board)):
         if len(board[row]) == len(board[0]):
@@ -71,10 +73,10 @@ def print_board(board):
                     stri += "-O"
                 else:
                     if col <= len(board[row]) - 2:
-                        if completed_boxes[(row - 1) // 2][col] == 0:
+                        if completed_boxes_temp[(row - 1) // 2][col] == 0:
                             stri += "| "
                         else:
-                            stri += "|" + str(completed_boxes[(row - 1) // 2][col])
+                            stri += "|" + str(completed_boxes_temp[(row - 1) // 2][col])
                     else:
                         stri += "|"
             else:
@@ -86,9 +88,12 @@ def print_board(board):
     print()
 
 
-def check_completed_box(board, move_r, move_c, player, pri):
+def check_completed_box(board, move_r, move_c, player, pri, completed_boxes_t=None):
     global completed_boxes
-    completed_boxes_temp = copy.deepcopy(completed_boxes)
+    if completed_boxes_t is None:
+        completed_boxes_temp = copy.deepcopy(completed_boxes)
+    else:
+        completed_boxes_temp = completed_boxes_t
     still_turn = False
     # Check if the current move is on a horizontal line
     if move_r % 2 == 0:
@@ -147,11 +152,11 @@ def check_completed_box(board, move_r, move_c, player, pri):
 
 
 # Checks if moves are valid and how they should be made (horizontal or vertical). Adds player # to completed boxes.
-def place_move(board, player, move_r, move_c, print):
+def place_move(board, player, move_r, move_c, print, completed_boxes_t=None):
     game_board = copy.deepcopy(board)
     game_board[move_r][move_c] = 1
 
-    still_turn, completed_boxes_temp = check_completed_box(board, move_r, move_c, player, print)
+    still_turn, completed_boxes_temp = check_completed_box(board, move_r, move_c, player, print, completed_boxes_t)
     return game_board, still_turn, completed_boxes_temp
 
 
@@ -291,20 +296,21 @@ def simulate(board, player, completed_boxes_temp):
         # Get a list of valid moves
         valid_moves = get_valid_moves(board)
         # Select a random move from the list of valid moves
-        if len(valid_moves) > 1:
+        if len(valid_moves) > 0:
             random_move = random.choice(valid_moves)
-        elif len(valid_moves) == 1:
-            random_move = valid_moves[0]
         else:
-            return check_win(board, completed_boxes_temp)
+            break
         # Extract row and column from the selected move
         move_r = random_move[0]
         move_c = random_move[1]
         # Place the move on the board without checking for a win
-        board, still_turn, completed_boxes_temp = place_move(board, player, move_r, move_c, False)
+        board, still_turn, completed_boxes_temp = place_move(board, player, move_r, move_c, False, completed_boxes_temp)
         # Switch to the other player
-        player = 1 if player == 1 and still_turn else 2
-        player = 2 if player == 2 and still_turn else 1
+        if not still_turn:
+            if player == 1:
+                player = 2
+            else:
+                player = 1
     # Return the game result (1, 2, or 3)
     return check_win(board, completed_boxes_temp)
 
@@ -317,10 +323,6 @@ def mcts(board, player, num_simulations):
 
     # Get a list of valid moves
     valid_moves = get_valid_moves(board)
-
-    # If there's only one valid move, return it immediately
-    if len(valid_moves) == 1:
-        return valid_moves[0]
 
     # Loop through all valid moves
     for move in valid_moves:
