@@ -18,7 +18,7 @@ args = dotdict({
 
 def normalize_score(board):
     p1_score = board[:, 0, -1]
-    p2_score = board[:, 1, -1]
+    p2_score = board[:, 2, -1]
     score = p1_score - p2_score
 
     n = board.shape[-1] - 1
@@ -31,7 +31,7 @@ def normalize_score(board):
             min_normalized - max_normalized) + max_normalized
 
     board[:, 0, -1] = normalized_score
-    board[:, 1, -1] = 0
+    board[:, 2, -1] = 0
 
 
 class NNetWrapper(NeuralNet):

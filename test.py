@@ -1,15 +1,17 @@
 import time
 
-import DotsAndBoxes as db
+import numpy as np
+
+from DotsAndBoxes import DotsAndBoxesGame as db
 
 if __name__ == '__main__':
     size = 3
-    g = db.DotsAndBoxes(size)
+    g = db(size)
     board = g.create_gameboard(size)
-    player1_type = "mcts"
-    depth_player1 = 1000
+    player1_type = "minimax"
+    depth_player1 = 7
     player2_type = "mcts"
-    depth_player2 = 1000
+    depth_player2 = 5000
     turn = 1
 
     done = False
@@ -25,7 +27,6 @@ if __name__ == '__main__':
 
         print(board)
         # g.display_board(board)
-        print(g.getValidMoves(board, 1))
         turn_end = time.perf_counter()
         turn_time = round((turn_end - turn_start), 4)
         # print('Turn time: ' + str(turn_time) + ' seconds' + '\n')

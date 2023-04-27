@@ -75,7 +75,7 @@ class MCTS():
         s = self.game.stringRepresentation(canonical_board)
 
         if s not in self.Es:
-            self.Es[s] = self.game.getGameEnded(canonical_board, 1)
+            self.Es[s] = self.game.get_game_ended(canonical_board, 1)
         if self.Es[s] != 0:
             # terminal node
             return -self.Es[s]
@@ -83,7 +83,7 @@ class MCTS():
         if s not in self.Ps:
             # leaf node
             self.Ps[s], v = self.nnet.predict(canonical_board)
-            valids = self.game.getValidMoves(canonical_board, 1)
+            valids = self.game.get_valid_moves(canonical_board, 1)
             self.Ps[s] = self.Ps[s] * valids  # masking invalid moves
             sum_Ps_s = np.sum(self.Ps[s])
             if sum_Ps_s > 0:
@@ -119,7 +119,7 @@ class MCTS():
                     best_act = a
 
         a = best_act
-        next_s, next_player = self.game.getNextState(canonical_board, 1, a)
+        next_s, next_player = self.game.get_next_state(canonical_board, 1, a)
         next_s = self.game.get_canonical_form(next_s, next_player)
 
         v = self.search(next_s)

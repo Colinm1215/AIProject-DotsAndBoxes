@@ -1,5 +1,5 @@
 import time
-import DotsAndBoxes as db
+from DotsAndBoxes import DotsAndBoxesGame as db
 
 # The program begins by allowing the user to choose from a scenario gamestate or select a new gamestate (a new game).
 # If a scenario is given, the user inputs the current turn for the given scenario.
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     inp = input("Please enter the name of the gamestate file to read in, or enter \"new\" : ")
     board = []
     turn_inp = "no"
-    g = db.DotsAndBoxes(3)
+    g = db(3)
     if inp == "new":
         size = int(input("Please enter the size of the new board : "))
         board = g.create_gameboard(size)
