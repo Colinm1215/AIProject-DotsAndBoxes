@@ -1,3 +1,8 @@
+import numpy as np
+import sys
+import os
+
+
 class NeuralNet():
     """
     This class specifies the base NeuralNet class. To define your own neural
