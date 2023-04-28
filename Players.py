@@ -13,7 +13,7 @@ class MCTSPlayer:
         # Continue simulating moves while the game is ongoing
         # still_turn = False
         cur_player = player
-        while self.game.get_game_ended(board, cur_player) == 0:
+        while self.game.check_win(board) == 0:
             # Get a list of valid moves
             valid_moves = self.game.get_valid_moves(board, cur_player)
             # Select a random move from the list of valid moves
@@ -28,7 +28,7 @@ class MCTSPlayer:
             if not still_turn:
                 cur_player = -cur_player
         # Return the game result
-        return self.game.get_game_ended(board, cur_player)
+        return self.game.check_win(board)
 
     # Monte Carlo Tree Search function
     def play(self, board):

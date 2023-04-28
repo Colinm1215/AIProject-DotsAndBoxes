@@ -193,63 +193,6 @@ class DotsAndBoxesGame:
                 board[2][-1] += b1 + b2
         return still_turn
 
-    def get_completed_boxes_old(self, board, move_r, move_c, player, pri):
-        completed_boxes_temp = np.copy(self.completed_boxes)
-        print(f'row:{move_r}, col:{move_c}')
-        still_turn = False
-        # Check if the current move is on a horizontal line
-        if move_r % 2 == 0:
-            # Check if there's a row above the current move
-            if move_r > 0:
-                # Check if there's a completed box above the current move
-                if (
-                        board[move_r - 1][move_c - 1]  # Line to the right and above the current move
-                        and board[move_r - 1][move_c]  # Line above the current move
-                        and board[move_r - 1][move_c + 1]  # Line to the left and above the current move
-                ):
-                    # Update the completed_boxes entry for the box above the current move
-                    completed_boxes_temp[(move_r - 2) // 2][move_c] = player
-                    still_turn = True
-            # Check if there's a row below the current move
-            if move_r < len(board) - 2:
-                # Check if there's a completed box below the current move
-                if (
-                        board[move_r + 1][move_c + 1]  # Line to the right and below the current move
-                        and board[move_r + 1][move_c]  # Line below the current move
-                        and board[move_r + 2][move_c]  # Line to the left and below the current move
-                ):
-                    # Update the completed_boxes entry for the box below the current move
-                    completed_boxes_temp[move_r // 2][move_c] = player
-                    still_turn = True
-        # Check if the current move is on a vertical line
-        elif move_r % 2 != 0:
-            # Check if there's a column to the left of the current move
-            if move_c > 0:
-                # Check if there's a completed box to the left of the current move
-                if (
-                        board[move_r][move_c - 1]  # Line to the left of the current move
-                        and board[move_r - 1][move_c - 1]  # Line above and to the left of the current move
-                        and board[move_r + 1][move_c - 1]  # Line below and to the left of the current move
-                ):
-                    # Update the completed_boxes entry for the box to the left of the current move
-                    completed_boxes_temp[(move_r - 1) // 2][move_c - 1] = player
-                    still_turn = True
-            # Check if there's a column to the right of the current move
-            if move_c <= len(board[move_r]) - 2:
-                # Check if there's a completed box to the right of the current move
-                if (
-                        board[move_r][move_c + 1]  # Line to the right of the current move
-                        and board[move_r - 1][move_c]  # Line above and to the right of the current move
-                        and board[move_r + 1][move_c]  # Line below and to the right of the current move
-                ):
-                    # Update the completed_boxes entry for the box to the right of the current move
-                    completed_boxes_temp[(move_r - 1) // 2][move_c] = player
-                    still_turn = True
-
-        if pri:
-            self.completed_boxes = completed_boxes_temp
-        return still_turn
-
     def get_next_state(self, board, player, action):
         b = np.copy(board)
         if action == self.get_action_size() - 1:
@@ -303,10 +246,7 @@ class DotsAndBoxesGame:
     def check_win(self, board):
         player1_count = board[0][-1]
         player2_count = board[2][-1]
-        size = self.n
         if self.has_legal_moves(board):
-            return 0
-        if player2_count + player1_count != size * size:
             return 0
         else:
             if player1_count > player2_count:
