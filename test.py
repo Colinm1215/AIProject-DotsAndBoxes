@@ -1,31 +1,34 @@
 import time
-
-import numpy as np
-
+import logging
+from Players import MinimaxPlayer, MCTSPlayer, HumanPlayer
 from DotsAndBoxes import DotsAndBoxesGame as db
+log = logging.getLogger(__name__)
 
 if __name__ == '__main__':
     size = 3
     g = db(size)
     board = g.create_gameboard(size)
-    player1_type = "minimax"
-    depth_player1 = 7
-    player2_type = "mcts"
-    depth_player2 = 5000
-    turn = 1
+    depth_player1 = 300
+    player1 = MCTSPlayer(g, depth_player1).play
+    depth_player2 = 300
+    player2 = MCTSPlayer(g,depth_player2).play
+    turn = 0
 
     done = False
     game_start = time.perf_counter()
-    while not done:
+    players = [player2, None, player1]
+    curPlayer = 1
+    while not g.get_game_ended(board, curPlayer):
         turn_start = time.perf_counter()
-        if turn % 2 == 0:
-            # print("Player 2's turn!")
-            board, still_turn, _ = g.switch_for_turn_type(board, 2, depth_player2, player2_type)
-        else:
-            # print("Player 1's turn!")
-            board, still_turn, _ = g.switch_for_turn_type(board, 1, depth_player1, player1_type)
+        action = players[curPlayer + 1](g.get_canonical_form(board, curPlayer))
+        valids = g.get_valid_moves(g.get_canonical_form(board, curPlayer), 1)
+        if valids[action] == 0:
+            log.error(f'Action {action} is not valid!')
+            log.debug(f'valids = {valids}')
+            assert valids[action] > 0
+        board, curPlayer = g.get_next_state(board, curPlayer, action)
 
-        print(board)
+        # print(board)
         # g.display_board(board)
         turn_end = time.perf_counter()
         turn_time = round((turn_end - turn_start), 4)
@@ -41,9 +44,9 @@ if __name__ == '__main__':
             print("Player 2 has won the game!")
         elif win_check == 3:
             print("The game has been tied!")
-        if not still_turn:
-            turn += 1
+        turn += 1
 
+    print("Game over: Turn ", str(turn), "Result ", str(g.get_game_ended(board, 1)))
     game_end = time.perf_counter()
     game_time = round((game_end - game_start), 3)
     print('Game time: ' + str(game_time) + ' seconds' + '\n')

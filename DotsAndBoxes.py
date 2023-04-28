@@ -62,6 +62,10 @@ class DotsAndBoxesGame:
         return board[4][-1]
 
     @staticmethod
+    def toggle_turn(board, turn=False):
+        board[4][-1] = turn
+
+    @staticmethod
     def get_canonical_form(board, player):
         board = np.copy(board)
         if player == -1:
@@ -155,6 +159,7 @@ class DotsAndBoxesGame:
                 board[0][-1] += b1 + b2
             else:
                 board[2][-1] += b1 + b2
+        self.toggle_turn(board, still_turn)
         if pri:
             self.completed_boxes = completed_boxes_temp
             return still_turn, self.completed_boxes
@@ -173,15 +178,14 @@ class DotsAndBoxesGame:
             # find box above
             if move_r > 0:
                 b2 = b[move_r - 2][move_c] and b[move_r - 1][move_c] and b[move_r - 1][move_c + 1]
-            # print(f'Box1: {b1} Box2: {b2}')
         # is vertical
         elif move_r % 2 != 0:
             if move_c < len(b[move_r]) - 1:
                 b1 = b[move_r][move_c + 1] and b[move_r + 1][move_c] and b[move_r - 1][move_c]
             if move_c > 0:
                 b2 = b[move_r][move_c - 1] and b[move_r - 1][move_c - 1] and b[move_r + 1][move_c - 1]
-            # print(f'Box1: {b1} Box2: {b2}')
-        if still_turn := b1 or b2:
+        still_turn = b1 or b2
+        if still_turn:
             if player == 1:
                 board[0][-1] += b1 + b2
             else:
@@ -247,53 +251,16 @@ class DotsAndBoxesGame:
 
     def get_next_state(self, board, player, action):
         b = np.copy(board)
-        if action == self.action_size - 1:
+        if action == self.get_action_size() - 1:
             b[4, -1] = 0
         else:
-            self.place_move_n(b, player, action)
-
+            if self.place_move_n(b, player, action):
+                self.toggle_turn(b, True)
         return b, -player
 
-    def getSymmetries(self, board, pi):
-        # mirror, rotational
-
-        horizontal = np.copy(board[:self.board_size[0]:2, :-1])
-        vertical = np.copy(board[1:self.board_size[0]:2, :])
-        t = self.n * (self.n + 1)
-        pi_horizontal = np.copy(pi[:t]).reshape((self.n + 1, self.n))
-        pi_vertical = np.copy(pi[t:-1]).reshape((self.n, self.n + 1))
-
-        l = []
-
-        for i in range(1, 5):
-            horizontal = np.rot90(horizontal)
-            vertical = np.rot90(vertical)
-            pi_horizontal = np.rot90(pi_horizontal)
-            pi_vertical = np.rot90(pi_vertical)
-
-            for _ in [True, False]:
-                horizontal = np.fliplr(horizontal)
-                vertical = np.fliplr(vertical)
-                pi_horizontal = np.fliplr(pi_horizontal)
-                pi_vertical = np.fliplr(pi_vertical)
-
-                new_board = self.create_board(self.n)
-                new_board[:self.board_size[0]:2, :-1] = vertical
-                new_board[1:self.board_size[0]:2, :] = horizontal
-
-                l += [(new_board, list(pi_vertical.ravel()) + list(pi_horizontal.ravel()) + [pi[-1]])]
-
-            aux = horizontal
-            horizontal = vertical
-            vertical = aux
-
-            aux = pi_horizontal
-            pi_horizontal = pi_vertical
-            pi_vertical = aux
-        return l
-
-    # TODO_ Make actions boolean array
     def place_move_n(self, board, player, action):
+        if action == self.action_size - 1:
+            return board, False
         is_horizontal = action < self.n * (self.n + 1)
         if is_horizontal:
             move = ((action // self.n) * 2, action % self.n)
@@ -306,6 +273,7 @@ class DotsAndBoxesGame:
         return board, still_turn
 
     def place_move(self, board, player, action, print, completed_boxes_t=None):
+        # assert self.is_still_turn(board) == 0
         is_horizontal = action < self.n * (self.n + 1)
         if is_horizontal:
             move = ((action // self.n) * 2, action % self.n)
@@ -386,66 +354,6 @@ class DotsAndBoxesGame:
         is_board_full = np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :])
         return not is_board_full
 
-    # MiniMax algorithm.
-    def minimax(self, board, depth, player, isMaximizingPlayer, alpha, beta, completed_boxes_temp):
-        win_check = self.check_win(board)
-        if depth == 0 or (win_check == 1 or win_check == 2):
-            return self.evaluate(player, board)
-
-        if isMaximizingPlayer:
-            best_value = float('-inf')
-            for move in self.get_valid_moves(board, player).nonzero()[0]:
-                new_board, still_turn, completed_boxes_temp = self.place_move(board, player, move, False)
-                if still_turn:
-                    value = self.minimax(new_board, depth - 1, player, True, alpha, beta, completed_boxes_temp)
-                else:
-                    next_player = 2 if player == 1 else 1
-                    value = self.minimax(new_board, depth - 1, next_player, False, alpha, beta, completed_boxes_temp)
-                best_value = max(best_value, value)
-                alpha = max(alpha, best_value)
-                if beta <= alpha:
-                    break
-            return best_value
-        else:
-            best_value = float('inf')
-            for move in self.get_valid_moves(board, player).nonzero()[0]:
-                new_board, still_turn, completed_boxes_temp = self.place_move(board, player, move, False)
-                if still_turn:
-                    value = self.minimax(new_board, depth - 1, player, False, alpha, beta, completed_boxes_temp)
-                else:
-                    next_player = 2 if player == 1 else 1
-                    value = self.minimax(new_board, depth - 1, next_player, True, alpha, beta, completed_boxes_temp)
-                best_value = min(best_value, value)
-                beta = min(beta, best_value)
-                if beta <= alpha:
-                    break
-            return best_value
-
-    # Selects the best move from the list of available valid moves using the MiniMax algorithm.
-    def get_best_move_minimax(self, board, depth, player):
-        game_board = np.copy(board)
-        best_move = None
-        best_value = float('-inf')
-
-        # if len(move_list) == 1:
-        #     return move_list[0]
-
-        for move in self.get_valid_moves(game_board, player).nonzero()[0]:
-            new_board, still_turn, completed_boxes_temp = self.place_move(game_board, player, move, False)
-            if still_turn:
-                value = self.evaluate(player, board)
-                value += self.minimax(new_board, depth - 1, player, True, float('-inf'), float('inf'),
-                                      completed_boxes_temp)
-            else:
-                next_player = 2 if player == 1 else 1
-                value = self.minimax(new_board, depth - 1, next_player, False, float('-inf'), float('inf'),
-                                     completed_boxes_temp)
-            if value >= best_value:
-                best_value = value
-                best_move = move
-
-        return best_move
-
     def in_valid_moves(self, move_r, move_c, game_board):
         valid_moves = self.get_valid_moves_coords(game_board)
         valid = False
@@ -454,100 +362,44 @@ class DotsAndBoxesGame:
                 valid = True
         return valid
 
-    # Simulates a random playout from the current game board until the game ends
-    def simulate(self, board, player, completed_boxes_temp):
-        # Continue simulating moves while the game is ongoing
-        while self.check_win(board) == 0:
-            # Get a list of valid moves
-            valid_moves = self.get_valid_moves(board, player)
-            # Select a random move from the list of valid moves
-            random_move = np.random.randint(self.get_action_size())
-            while valid_moves[random_move] != 1:
-                random_move = np.random.randint(self.get_action_size())
-            # if len(valid_moves) > 0:
-            #     random_move = np.random.randint(self.get_action_size())
-            # else:
-            #     break
+    @staticmethod
+    def dispDummy(board):
+        pass
 
-            # Extract row and column from the selected move
-            # Place the move on the board without checking for a win
-            board, still_turn, completed_boxes_temp = self.place_move(board, player, random_move, False,
-                                                                      completed_boxes_temp)
-            # Switch to the other player
-            if not still_turn:
-                if player == 1:
-                    player = 2
-                else:
-                    player = 1
-        # Return the game result (1, 2, or 3)
-        return self.check_win(board)
+    def getSymmetries(self, board, pi):
+        # mirror, rotational
 
-    # Monte Carlo Tree Search function
-    def mcts(self, board, player, num_simulations):
-        # Initialize the best move and best score
-        best_move = None
-        best_score = float('-inf')
+        horizontal = np.copy(board[:self.board_size[0]:2, :-1])
+        vertical = np.copy(board[1:self.board_size[0]:2, :])
+        t = self.n * (self.n + 1)
+        pi_horizontal = np.copy(pi[:t]).reshape((self.n + 1, self.n))
+        pi_vertical = np.copy(pi[t:-1]).reshape((self.n, self.n + 1))
 
-        # Get a list of valid moves
-        valid_moves = self.get_valid_moves(board, player)
+        l = []
 
-        # # If there's only one valid move, return it immediately
-        # if len(valid_moves) == 1:
-        #     return valid_moves[0]
+        for i in range(1, 5):
+            horizontal = np.rot90(horizontal)
+            vertical = np.rot90(vertical)
+            pi_horizontal = np.rot90(pi_horizontal)
+            pi_vertical = np.rot90(pi_vertical)
 
-        # Loop through all valid moves
-        for move in np.nonzero(valid_moves)[0]:
-            # Place the move on a copy of the board without checking for a win
-            new_board, still_turn, completed_boxes_temp = self.place_move(np.copy(board), player, move, False)
-            # Initialize the number of wins for this move
-            wins = 0
+            for _ in [True, False]:
+                horizontal = np.fliplr(horizontal)
+                vertical = np.fliplr(vertical)
+                pi_horizontal = np.fliplr(pi_horizontal)
+                pi_vertical = np.fliplr(pi_vertical)
 
-            # Perform a specified number of simulations for this move
-            for _ in range(num_simulations):
-                # Simulate a random playout and get the game result
-                simulation_result = self.simulate(new_board, player, completed_boxes_temp)
-                # If the result is a win for the current player, increment the wins counter
-                if simulation_result == player:
-                    wins += 1
+                new_board = self.create_board(self.n)
+                new_board[:self.board_size[0]:2, :-1] = vertical
+                new_board[1:self.board_size[0]:2, :] = horizontal
 
-            # Calculate the win rate for this move
-            win_rate = wins / num_simulations
+                l += [(new_board, list(pi_vertical.ravel()) + list(pi_horizontal.ravel()) + [pi[-1]])]
 
-            # If the win rate is higher than the current best score, update the best move and best score
-            if win_rate > best_score:
-                best_score = win_rate
-                best_move = move
+            aux = horizontal
+            horizontal = vertical
+            vertical = aux
 
-        # Return the best move found
-        return best_move
-
-    def perform_turn_manual(self, board, player):
-        player_move_row = int(input("Enter Move Row : "))
-        player_move_col = int(input("Enter Move Col : "))
-        while not self.in_valid_moves(player_move_row, player_move_col, board):
-            print("Invalid Move")
-            player_move_row = int(input("Enter Move Row : "))
-            player_move_col = int(input("Enter Move Col : "))
-
-        print("Placing at ", [player_move_row, player_move_col])
-        return self.place_move_coords(board, player, player_move_row, player_move_col, True)
-
-    def perform_turn_minimax(self, board, player, depth):
-        move = self.get_best_move_minimax(board, depth, player)
-        print("Placing at ", move)
-        return self.place_move(board, player, move, True)
-
-    def perform_turn_mcts(self, board, player, depth):
-        move = self.mcts(board, player, depth)
-        # print("Placing at ", move)
-        return self.place_move(board, player, move, True)
-
-    def switch_for_turn_type(self, board, player, depth, type):
-        if type == "minimax":
-            return self.perform_turn_minimax(board, player, depth)
-        elif type == "mcts":
-            return self.perform_turn_mcts(board, player, depth)
-        elif type == "manual":
-            return self.perform_turn_manual(board, player)
-        else:
-            return None, False
+            aux = pi_horizontal
+            pi_horizontal = pi_vertical
+            pi_vertical = aux
+        return l

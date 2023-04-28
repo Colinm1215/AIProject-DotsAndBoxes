@@ -55,7 +55,6 @@ class Coach():
             canonicalBoard = self.game.get_canonical_form(board, self.curPlayer)
             temp = int(episodeStep < self.args.tempThreshold)
 
-            # TODO_
             pi = self.mcts.getActionProb(canonicalBoard, temp=temp)
             sym = self.game.getSymmetries(canonicalBoard, pi)
             for b, p in sym:
