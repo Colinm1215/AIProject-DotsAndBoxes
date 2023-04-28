@@ -18,11 +18,11 @@ if __name__ == '__main__':
     mcts1 = MCTS(g, n1, args1)
     n1p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
 
-    mmp1 = MinimaxPlayer(g, 4).play
-    mctsp2 = MCTSPlayer(g, 500).play
+    mmp1 = MinimaxPlayer(g, 6).play
+    mctsp2 = MCTSPlayer(g, 3000).play
 
-    p1 = n1p
-    p2 = mmp1
+    p1 = mmp1
+    p2 = mctsp2
 
     arena = Arena.Arena(p1, p2, g, display=DotsAndBoxesGame.dispDummy)
     oneWon, twoWon, draws = arena.playGames(40, verbose=False)

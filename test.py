@@ -8,10 +8,10 @@ if __name__ == '__main__':
     size = 3
     g = db(size)
     board = g.create_gameboard(size)
-    depth_player1 = 300
-    player1 = MCTSPlayer(g, depth_player1).play
-    depth_player2 = 300
-    player2 = MCTSPlayer(g,depth_player2).play
+    depth_player1 = 4
+    player1 = MinimaxPlayer(g, depth_player1).play
+    depth_player2 = 50
+    player2 = MCTSPlayer(g, depth_player2).play
     turn = 0
 
     done = False

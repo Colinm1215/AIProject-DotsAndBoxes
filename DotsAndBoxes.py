@@ -118,6 +118,7 @@ class DotsAndBoxesGame:
                     s = "x   " if board[i + n][j] else "|   "
                     print(s, end="")
             print("")
+        print(f'Player 1: {board[0][-1]} Player 2: {board[2][-1]}')
 
     @staticmethod
     def stringRepresentation(board):
@@ -254,12 +255,13 @@ class DotsAndBoxesGame:
         if action == self.get_action_size() - 1:
             b[4, -1] = 0
         else:
-            if self.place_move_n(b, player, action):
-                self.toggle_turn(b, True)
+            _, still_turn = self.place_move_n(b, player, action)
+            b[4, -1] = still_turn
         return b, -player
 
     def place_move_n(self, board, player, action):
         if action == self.action_size - 1:
+            board[4][-1] = 0
             return board, False
         is_horizontal = action < self.n * (self.n + 1)
         if is_horizontal:
@@ -302,6 +304,8 @@ class DotsAndBoxesGame:
         player1_count = board[0][-1]
         player2_count = board[2][-1]
         size = self.n
+        if self.has_legal_moves(board):
+            return 0
         if player2_count + player1_count != size * size:
             return 0
         else:

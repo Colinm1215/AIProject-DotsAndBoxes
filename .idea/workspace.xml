@@ -7,14 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Alpha Zero Training working">
-      <change afterPath="$PROJECT_DIR$/ArenaTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Players.py" afterDir="false" />
+    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Fixed invalid moves">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arena.py" beforeDir="false" afterPath="$PROJECT_DIR$/Arena.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coach.py" beforeDir="false" afterPath="$PROJECT_DIR$/Coach.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ArenaTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DotsAndBoxes.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCTS.py" beforeDir="false" afterPath="$PROJECT_DIR$/MCTS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Players.py" beforeDir="false" afterPath="$PROJECT_DIR$/Players.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" afterDir="false" />
@@ -75,7 +72,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main2">
+  <component name="RunManager" selected="Python.ArenaTest">
     <configuration name="ArenaTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -197,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682628999603</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed invalid moves">
+      <created>1682644983546</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682644983546</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,7 +218,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Dots and Boxes Class&#10;Performance improvements" />
     <MESSAGE value="Alpha Zero Training working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alpha Zero Training working" />
+    <MESSAGE value="Fixed invalid moves" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed invalid moves" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

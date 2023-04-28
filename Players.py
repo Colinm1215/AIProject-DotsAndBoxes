@@ -1,5 +1,7 @@
 import numpy as np
 
+rng = np.random.default_rng()
+
 
 class MCTSPlayer:
     def __init__(self, game, depth):
@@ -9,24 +11,24 @@ class MCTSPlayer:
     # Simulates a random playout from the current game board until the game ends
     def simulate(self, board, player):
         # Continue simulating moves while the game is ongoing
-
-        while not self.game.get_game_ended(board, player):
+        # still_turn = False
+        cur_player = player
+        while self.game.get_game_ended(board, cur_player) == 0:
             # Get a list of valid moves
-            valid_moves = self.game.get_valid_moves(board, player)
+            valid_moves = self.game.get_valid_moves(board, cur_player)
             # Select a random move from the list of valid moves
-            random_move = np.random.randint(self.game.get_action_size())
-            while valid_moves[random_move] != 1:
-                random_move = np.random.randint(self.game.get_action_size())
-            # if random_move == self.game.get_action_size()-1:
-            #     still_turn = False
-            # else:
+            valid_moves = np.nonzero(valid_moves)[0]
+            random_idx = np.random.randint(len(valid_moves))
+            random_move = valid_moves[random_idx]
+            # while valid_moves[random_move] != 1:
+            #     random_move = np.random.randint(self.game.get_action_size())
+            board, still_turn = self.game.place_move_n(board, cur_player, random_move)
             # Place the move on the board without checking for a win
-            board, still_turn = self.game.place_move_n(board, player, random_move)
             # Switch to the other player
             if not still_turn:
-                player = -player
-        # Return the game result (1, 2, or 3)
-        return self.game.check_win(board)
+                cur_player = -cur_player
+        # Return the game result
+        return self.game.get_game_ended(board, cur_player)
 
     # Monte Carlo Tree Search function
     def play(self, board):
@@ -34,8 +36,9 @@ class MCTSPlayer:
         best_move = None
         best_score = float('-inf')
         player = 1
+        new_board = np.copy(board)
         # Get a list of valid moves
-        valid_moves = self.game.get_valid_moves(board, 1)
+        valid_moves = self.game.get_valid_moves(new_board, 1)
 
         # # If there's only one valid move, return it immediately
         # if len(valid_moves) == 1:
@@ -44,7 +47,7 @@ class MCTSPlayer:
         # Loop through all valid moves
         for move in np.nonzero(valid_moves)[0]:
             # Place the move on a copy of the board without checking for a win
-            new_board, player = self.game.get_next_state(np.copy(board), player, move)
+            new_board, still_turn = self.game.place_move_n(new_board, player, move)
             # Initialize the number of wins for this move
             wins = 0
 
@@ -115,7 +118,6 @@ class MinimaxPlayer:
 
         # if len(move_list) == 1:
         #     return move_list[0]
-
         for move in self.game.get_valid_moves(game_board, player).nonzero()[0]:
             new_board, still_turn = self.game.place_move_n(board, player, move)
             if still_turn:
