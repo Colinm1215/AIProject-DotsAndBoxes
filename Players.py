@@ -22,6 +22,8 @@ class MCTSPlayer:
             random_move = valid_moves[random_idx]
             # while valid_moves[random_move] != 1:
             #     random_move = np.random.randint(self.game.get_action_size())
+            # if len(valid_moves) == 0:
+            #     break
             board, still_turn = self.game.place_move_n(board, cur_player, random_move)
             # Place the move on the board without checking for a win
             # Switch to the other player
@@ -38,14 +40,13 @@ class MCTSPlayer:
         player = 1
         new_board = np.copy(board)
         # Get a list of valid moves
-        valid_moves = self.game.get_valid_moves(new_board, 1)
-
+        valid_moves = np.nonzero(self.game.get_valid_moves(new_board, 1))[0]
         # # If there's only one valid move, return it immediately
-        # if len(valid_moves) == 1:
-        #     return valid_moves[0]
+        if len(valid_moves) == 1:
+            return valid_moves[0]
 
         # Loop through all valid moves
-        for move in np.nonzero(valid_moves)[0]:
+        for move in valid_moves:
             # Place the move on a copy of the board without checking for a win
             new_board, still_turn = self.game.place_move_n(new_board, player, move)
             # Initialize the number of wins for this move
@@ -115,10 +116,12 @@ class MinimaxPlayer:
         best_move = None
         best_value = float('-inf')
         player = 1
+        valid_moves = self.game.get_valid_moves(game_board, player).nonzero()[0]
 
-        # if len(move_list) == 1:
-        #     return move_list[0]
-        for move in self.game.get_valid_moves(game_board, player).nonzero()[0]:
+        if len(valid_moves) == 1:
+            return valid_moves[0]
+
+        for move in valid_moves:
             new_board, still_turn = self.game.place_move_n(board, player, move)
             if still_turn:
                 value = self.game.evaluate(player, board)

@@ -25,6 +25,6 @@ if __name__ == '__main__':
     p1 = mctsp1
     p2 = mmp1
 
-    arena = Arena.Arena(p1, p2, g, display=DotsAndBoxesGame.dispDummy)
+    arena = Arena.Arena(p1, p2, g, display=DotsAndBoxesGame.display_board)
     oneWon, twoWon, draws = arena.playGames(20, verbose=False)
     print("oneWon: {}, twoWon: {}, draws: {}".format(oneWon, twoWon, draws))

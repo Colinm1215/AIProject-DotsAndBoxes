@@ -9,7 +9,7 @@ class DotsAndBoxesGame:
         self.action_size = 2 * (self.n + 1) * self.n + 1
 
     # Reads in a given scenario game state.
-    def read_gamestate(self, file_path):
+    def read_gamestate_old(self, file_path):
         f = open(file_path, "r")
         first_row = f.readline()
         board = self.create_gameboard(len(first_row) - 2)
@@ -38,6 +38,11 @@ class DotsAndBoxesGame:
             col = 0
             row += 1
 
+        return board
+
+    def read_gamestate(self, file_path):
+        board = np.loadtxt(file_path, dtype=int)
+        # print(board)
         return board
 
     # Creates a new gamestate of a size selected by the user. Used if no scenario is given.
@@ -118,7 +123,8 @@ class DotsAndBoxesGame:
                     s = "x   " if board[i + n][j] else "|   "
                     print(s, end="")
             print("")
-        print(f'Player 1: {board[0][-1]} Player 2: {board[2][-1]}')
+        print("Pass: {}".format(board[4, -1]))
+        print("Score {} x {}".format(board[0, -1], board[2, -1]))
 
     @staticmethod
     def stringRepresentation(board):
