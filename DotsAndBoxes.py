@@ -40,7 +40,8 @@ class DotsAndBoxesGame:
 
         return board
 
-    def read_gamestate(self, file_path):
+    @staticmethod
+    def read_gamestate(file_path):
         board = np.loadtxt(file_path, dtype=int)
         # print(board)
         return board

@@ -7,44 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Gamestate file reading and fixed delimiters">
+    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="moved scenarios to folder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArenaTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DotsAndBoxes.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Players.py" beforeDir="false" afterPath="$PROJECT_DIR$/Players.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario1-3.1-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario1-3.1-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario1-3.1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario1-3.1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario10-5.4-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario10-5.4-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario10-5.4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario10-5.4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario11-5.5-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario11-5.5-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario11-5.5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario11-5.5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario12-5.6-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario12-5.6-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario12-5.6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario12-5.6.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario13-7.1-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario13-7.1-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario13-7.1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario13-7.1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario14-7.2-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario14-7.2-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario14-7.2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario14-7.2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario15-7.3-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario15-7.3-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario15-7.3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario15-7.3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario2-3.2-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario2-3.2-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario2-3.2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario2-3.2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario3-3.3-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario3-3.3-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario3-3.3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario3-3.3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario4-3.4-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario4-3.4-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario4-3.4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario4-3.4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario5-3.5-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario5-3.5-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario5-3.5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario5-3.5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario6-3.6-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario6-3.6-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario6-3.6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario6-3.6.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario7-5.1-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario7-5.1-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario7-5.1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario7-5.1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario8-5.2-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario8-5.2-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario8-5.2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario8-5.2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario9-5.3-matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario9-5.3-matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario9-5.3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenarios/scenario9-5.3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temp/best.h5" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/temp/checkpoint_0.pth.tar.examples" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/temp/checkpoint_1.h5" beforeDir="false" />
@@ -98,11 +67,12 @@
       <recent name="C:\Users\colin\Desktop\AIProject-DotsAndBoxes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models/3x3" />
       <recent name="$PROJECT_DIR$/scenarios" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ArenaTest">
+  <component name="RunManager" selected="Python.main2">
     <configuration name="ArenaTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -252,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682659087151</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="moved scenarios to folder">
+      <created>1682792932400</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682792932400</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -273,7 +250,8 @@
     <MESSAGE value="Fixed board turn switch" />
     <MESSAGE value="Fixed MCTS" />
     <MESSAGE value="Gamestate file reading and fixed delimiters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gamestate file reading and fixed delimiters" />
+    <MESSAGE value="moved scenarios to folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved scenarios to folder" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
