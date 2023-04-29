@@ -8,7 +8,7 @@ from utils import dotdict
 import os
 
 if __name__ == '__main__':
-    g = DotsAndBoxesGame(5)
+    g = DotsAndBoxesGame(3)
 
     # numMCTSSims = 50
     # n1 = NNetWrapper(g)
@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     mmp1 = MinimaxPlayer(g, 6).play
     mctsp2 = MCTSPlayer(g, 500).play
-    mctsp1 = MCTSPlayer(g, 500).play
+    mctsp1 = MCTSPlayer(g, 30).play
 
     p1 = mctsp1
     p2 = mmp1

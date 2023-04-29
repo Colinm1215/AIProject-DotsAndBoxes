@@ -7,13 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="moved scenarios to folder">
+    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Training Settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DotsAndBoxes.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ArenaTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temp/best.h5" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/temp/checkpoint_0.pth.tar.examples" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/temp/checkpoint_1.h5" beforeDir="false" />
@@ -229,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682792932400</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Training Settings">
+      <created>1682794037290</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682794037290</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,7 +259,8 @@
     <MESSAGE value="Fixed MCTS" />
     <MESSAGE value="Gamestate file reading and fixed delimiters" />
     <MESSAGE value="moved scenarios to folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved scenarios to folder" />
+    <MESSAGE value="Training Settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Training Settings" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
