@@ -11,7 +11,6 @@ class MCTSPlayer:
     # Simulates a random playout from the current game board until the game ends
     def simulate(self, board, player):
         # Continue simulating moves while the game is ongoing
-        # still_turn = False
         cur_player = player
         while self.game.check_win(board) == 0:
             # Get a list of valid moves
@@ -20,12 +19,8 @@ class MCTSPlayer:
             valid_moves = np.nonzero(valid_moves)[0]
             random_idx = np.random.randint(len(valid_moves))
             random_move = valid_moves[random_idx]
-            # while valid_moves[random_move] != 1:
-            #     random_move = np.random.randint(self.game.get_action_size())
-            # if len(valid_moves) == 0:
-            #     break
-            board, still_turn = self.game.place_move_n(board, cur_player, random_move)
             # Place the move on the board without checking for a win
+            board, still_turn = self.game.place_move_n(board, cur_player, random_move)
             # Switch to the other player
             if not still_turn:
                 cur_player = -cur_player
@@ -141,6 +136,7 @@ class HumanPlayer:
         self.depth = depth
 
     def play(self, board):
+        # if turn pass, skip turn
         if board[4][-1]:
             return self.game.getActionSize() - 1
         valid_moves = self.game.get_valid_moves(board, 1)

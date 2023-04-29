@@ -47,12 +47,12 @@ class DotsAndBoxesGame:
 
     # Creates a new gamestate of a size selected by the user. Used if no scenario is given.
     def create_gameboard(self, size):
-        self.completed_boxes = np.zeros([3, 3], dtype=int)
+        # self.completed_boxes = np.zeros([3, 3], dtype=int)
         board = np.zeros((size * 2 + 1, size + 1), dtype=int)
         return board
 
     def create_board(self, size):
-        self.completed_boxes = np.zeros([3, 3], dtype=int)
+        # self.completed_boxes = np.zeros([3, 3], dtype=int)
         board = np.zeros((size * 2 + 1, size + 1), dtype=int)
         return board
 
@@ -204,7 +204,7 @@ class DotsAndBoxesGame:
         if action == self.get_action_size() - 1:
             b[4, -1] = 0
         else:
-            _, still_turn = self.place_move_n(b, player, action)
+            b, still_turn = self.place_move_n(b, player, action)
             b[4, -1] = still_turn
         return b, -player
 

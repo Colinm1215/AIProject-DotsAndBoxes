@@ -8,7 +8,7 @@ from DotsAndBoxes import DotsAndBoxesGame as db
 log = logging.getLogger(__name__)
 
 if __name__ == '__main__':
-    size = 3
+    size = 5
     g = db(size)
     # board = g.read_gamestate("scenario1-3.1-matrix.txt")
     board = g.create_board(size)
