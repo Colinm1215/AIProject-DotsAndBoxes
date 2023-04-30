@@ -1,5 +1,5 @@
 import time
-from DotsAndBoxes import DotsAndBoxesGame as db
+from DotsAndBoxesGame import DotsAndBoxesGame as db
 
 # The program begins by allowing the user to choose from a scenario gamestate or select a new gamestate (a new game).
 # If a scenario is given, the user inputs the current turn for the given scenario.
@@ -10,16 +10,16 @@ from DotsAndBoxes import DotsAndBoxesGame as db
 # The board is evaluated after each turn to determine if it is over. If so, a result is displayed.
 # The time of each turn and overall game is tracked.
 if __name__ == '__main__':
-    inp = input("Please enter the name of the gamestate file to read in, or enter \"new\" : ")
+    filename = input("Please enter the name of the gamestate file to read in, or enter \"new\" : ")
     board = []
     turn_inp = "no"
     g = db(3)
-    if inp == "new":
+    if filename == "new":
         size = int(input("Please enter the size of the new board : "))
-        board = g.create_gameboard(size)
+        board = g.create_board(size)
     else:
         turn_inp = input("Scenario Testing - Enter current turn number or enter 'no': ")
-        board = g.read_gamestate(inp)
+        board = g.read_gamestate(filename)
 
     player1_type = "none"
     depth_player1 = 0

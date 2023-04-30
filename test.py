@@ -4,14 +4,14 @@ import logging
 import numpy as np
 
 from Players import MinimaxPlayer, MCTSPlayer, HumanPlayer
-from DotsAndBoxes import DotsAndBoxesGame as db
+from DotsAndBoxesGame import DotsAndBoxesGame as db
 log = logging.getLogger(__name__)
 
 if __name__ == '__main__':
-    size = 5
+    size = 3
     g = db(size)
-    # board = g.read_gamestate("scenario1-3.1-matrix.txt")
-    board = g.create_board(size)
+    board = g.read_gamestate("./scenarios/scenario1-3.1-matrix.txt")
+    # board = g.create_board(size)
     depth_player1 = 10
     player1 = MinimaxPlayer(g, depth_player1).play
     depth_player2 = 600
@@ -25,15 +25,15 @@ if __name__ == '__main__':
     while not g.get_game_ended(board, curPlayer):
         turn_start = time.perf_counter()
         action = players[curPlayer + 1](g.get_canonical_form(np.copy(board), curPlayer))
-        print(action)
+        # print(action)
         # valids = g.get_valid_moves(g.get_canonical_form(board, curPlayer), 1)
         board, curPlayer = g.get_next_state(board, curPlayer, action)
 
-        print(board)
+        # print(board)
         # g.display_board(board)
         turn_end = time.perf_counter()
         turn_time = round((turn_end - turn_start), 4)
-        print('Turn time: ' + str(turn_time) + ' seconds' + '\n')
+        # print('Turn time: ' + str(turn_time) + ' seconds' + '\n')
         win_check = g.check_win(board)
 
         if win_check > 0:

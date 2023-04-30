@@ -1,12 +1,31 @@
+import os
+
 import numpy as np
 
+from MCTS import MCTS
+from NNetWrap import NNetWrapper
+from utils import dotdict
+
 rng = np.random.default_rng()
+
+
+class AlphaZeroPlayer:
+    def __init__(self, game, checkpoint_dir, num_sims):
+        n1 = NNetWrapper(game)
+        n1.load_checkpoint(os.path.join(checkpoint_dir), 'best.pth.tar')
+        args1 = dotdict({'numMCTSSims': num_sims, 'cpuct': 1.0})
+        self.mcts = MCTS(game, n1, args1)
+        self.name = "AlphaZero"
+
+    def play(self, board):
+        return np.argmax(self.mcts.getActionProb(board, temp=0))
 
 
 class MCTSPlayer:
     def __init__(self, game, depth):
         self.game = game
         self.depth = depth
+        self.name = "MCTS"
 
     # Simulates a random playout from the current game board until the game ends
     def simulate(self, board, player):
@@ -71,21 +90,22 @@ class MinimaxPlayer:
     def __init__(self, game, depth):
         self.game = game
         self.depth = depth
+        self.name = "Minimax"
 
     # MiniMax algorithm.
     def minimax(self, board, depth, player, isMaximizingPlayer, alpha, beta):
-        win_check = self.game.check_win(board)
-        if depth == 0 or (win_check == 1 or win_check == 2):
+        # win_check = self.game.check_win(board)
+        # if depth == 0 or (win_check == 1 or win_check == 2):
+        if depth == 0 or self.game.get_game_ended(board, player) != 0:
             return self.game.evaluate(player, board)
 
         if isMaximizingPlayer:
             best_value = float('-inf')
             for move in self.game.get_valid_moves(board, player).nonzero()[0]:
                 new_board, still_turn = self.game.place_move_n(board, player, move)
-                if still_turn:
-                    value = self.minimax(new_board, depth - 1, player, True, alpha, beta)
-                else:
-                    value = self.minimax(new_board, depth - 1, -player, False, alpha, beta)
+                if not still_turn:
+                    player = -player
+                value = self.minimax(new_board, depth - 1, player, still_turn, alpha, beta)
                 best_value = max(best_value, value)
                 alpha = max(alpha, best_value)
                 if beta <= alpha:
@@ -95,10 +115,9 @@ class MinimaxPlayer:
             best_value = float('inf')
             for move in self.game.get_valid_moves(board, player).nonzero()[0]:
                 new_board, still_turn = self.game.place_move_n(board, player, move)
-                if still_turn:
-                    value = self.minimax(new_board, depth - 1, player, True, alpha, beta)
-                else:
-                    value = self.minimax(new_board, depth - 1, -player, False, alpha, beta)
+                if not still_turn:
+                    player = -player
+                value = self.minimax(new_board, depth - 1, player, still_turn, alpha, beta)
                 best_value = min(best_value, value)
                 beta = min(beta, best_value)
                 if beta <= alpha:
@@ -134,6 +153,7 @@ class HumanPlayer:
     def __init__(self, game, depth):
         self.game = game
         self.depth = depth
+        self.name = "Human"
 
     def play(self, board):
         # if turn pass, skip turn
