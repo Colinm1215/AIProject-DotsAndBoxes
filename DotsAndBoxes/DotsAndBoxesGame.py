@@ -8,42 +8,9 @@ class DotsAndBoxesGame:
         self.board_size = 2 * self.n + 1, self.n + 1
         self.action_size = 2 * (self.n + 1) * self.n + 1
 
-    # Reads in a given scenario game state.
-    def read_gamestate_old(self, file_path):
-        f = open(file_path, "r")
-        first_row = f.readline()
-        board = self.create_gameboard(len(first_row) - 2)
-        f = open(file_path, "r")
-        row = 0
-        col = 0
-        for x in f:
-            if x == "\n" or x == "":
-                continue
-            x = x.strip("\n")
-            for c in x:
-                if row % 2 == 0:
-                    if row == len(board):
-                        continue
-                    if col == len(board[0]):
-                        continue
-                if c == "\n":
-                    continue
-                if c == "1":
-                    board[row][col] = 1
-                else:
-                    board[row][col] = 0
-                col += 1
-                # Shouldn't be needed
-                # print_board(board)
-            col = 0
-            row += 1
-
-        return board
-
     @staticmethod
     def read_gamestate(file_path):
         board = np.loadtxt(file_path, dtype=int)
-        # print(board)
         return board
 
     # Creates a new gamestate of a size selected by the user. Used if no scenario is given.
@@ -56,12 +23,6 @@ class DotsAndBoxesGame:
     def create_board(size):
         board = np.zeros((size * 2 + 1, size + 1), dtype=int)
         return board
-
-    def get_action_size(self):
-        return self.action_size
-
-    def get_board_size(self):
-        return self.board_size
 
     @staticmethod
     def is_still_turn(board):
@@ -81,36 +42,6 @@ class DotsAndBoxesGame:
             board[2, -1] = aux
         return board
 
-    # Prints the game board.
-    def print_board(self, board):
-        o_size = len(board[0])
-        for row in range(len(board)):
-            if len(board[row]) == len(board[0]):
-                type = "row"
-                stri = "O"
-            else:
-                type = "col"
-                stri = ""
-            for col in range(len(board[row])):
-                if board[row][col] == 1:
-                    if type == "row":
-                        stri += "-O"
-                    else:
-                        if col <= len(board[row]) - 2:
-                            if self.completed_boxes[(row - 1) // 2][col] == 0:
-                                stri += "| "
-                            else:
-                                stri += "|" + str(self.completed_boxes[(row - 1) // 2][col])
-                        else:
-                            stri += "|"
-                else:
-                    if type == "row":
-                        stri += " O"
-                    else:
-                        stri += "  "
-            print(stri)
-        print()
-
     @staticmethod
     def display_board(board):
         n = board.shape[1]
@@ -129,7 +60,7 @@ class DotsAndBoxesGame:
 
     @staticmethod
     def stringRepresentation(board):
-        return board.tostring()
+        return board.tobytes()
 
     def check_completed_boxes(self, board, move_r, move_c, player, pri, completed_boxes_t=None):
         # print(f'row:{move_r}, col:{move_c}')
@@ -202,7 +133,7 @@ class DotsAndBoxesGame:
 
     def get_next_state(self, board, player, action):
         b = np.copy(board)
-        if action == self.get_action_size() - 1:
+        if action == self.action_size - 1:
             b[4, -1] = 0
         else:
             b, still_turn = self.place_move_n(b, player, action)
@@ -253,7 +184,7 @@ class DotsAndBoxesGame:
     def check_win(self, board):
         player1_count = board[0][-1]
         player2_count = board[2][-1]
-        if self.has_legal_moves(board):
+        if self.has_valid_moves(board):
             return 0
         else:
             if player1_count > player2_count:
@@ -265,7 +196,7 @@ class DotsAndBoxesGame:
 
     def get_game_ended(self, board, player):
         # return 0 if not ended, 1 if player 1 won, -1 if player 1 lost
-        if self.has_legal_moves(board):
+        if self.has_valid_moves(board):
             return 0
 
         if board[0][-1] == board[2][-1]:
@@ -301,7 +232,7 @@ class DotsAndBoxesGame:
             valid_moves[-1] = True
         return valid_moves
 
-    def has_legal_moves(self, board):
+    def has_valid_moves(self, board):
         is_board_full = np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :])
         return not is_board_full
 

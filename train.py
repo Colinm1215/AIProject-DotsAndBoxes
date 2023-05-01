@@ -2,9 +2,9 @@ import logging
 import coloredlogs
 from Coach import Coach
 from utils import dotdict
-from NNetWrap import NNetWrapper as nn
+from DotsAndBoxes.keras.NNetWrapper import NNetWrapper as nn
 
-from DotsAndBoxesGame import DotsAndBoxesGame
+from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame
 
 log = logging.getLogger(__name__)
 

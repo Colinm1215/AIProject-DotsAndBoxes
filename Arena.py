@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 class Arena:
     """
-    An Arena class where any 2 agents can be pit against each other.
+    An Arena class where any 2 agents can be pitted against each other.
     """
 
     def __init__(self, player1, player2, game, display=None):

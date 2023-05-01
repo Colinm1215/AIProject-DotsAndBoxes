@@ -24,8 +24,8 @@ class DotsAndBoxesNNet():
         self.input_boards = None
         self.v = None
         self.pi = None
-        self.board_x, self.board_y = game.get_board_size()
-        self.action_size = game.get_action_size()
+        self.board_x, self.board_y = game.board_size
+        self.action_size = game.action_size
         self.args = args
 
         self.model = self.create_model(args.dropout)

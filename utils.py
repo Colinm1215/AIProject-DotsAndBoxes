@@ -1,7 +1,5 @@
 import matplotlib
 import numpy as np
-
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 
@@ -38,7 +36,7 @@ class graph_data:
         plt.xticks(np.arange(min(x), max(x) + 1, 1.0))
         plt.xlabel("Game")
         plt.ylabel("Average Time")
-        plt.title("Average Game Time")
+        plt.title("Average Game Time (seconds)")
         plt.show()
 
     @staticmethod
@@ -51,7 +49,7 @@ class graph_data:
         plt.xticks(np.arange(min(x), max(x) + 1, 1.0))
         plt.xlabel("Game")
         plt.ylabel("Average Time")
-        plt.title("Average Turn Time")
+        plt.title("Average Turn Time (seconds)")
         plt.xlim(left=1, right=num_games)
         plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         plt.show()

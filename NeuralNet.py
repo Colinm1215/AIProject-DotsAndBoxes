@@ -10,7 +10,7 @@ class NeuralNet():
     network does not consider the current player, and instead only deals with
     the canonical form of the board.
 
-    See othello/NNet.py for an example implementation.
+    See othello/NNetWrapper.py for an example implementation.
     """
 
     def __init__(self, game):

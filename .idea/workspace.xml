@@ -7,33 +7,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Requirements">
+    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Training Parameters, Game Statistics">
+      <change afterPath="$PROJECT_DIR$/test_dotsandboxes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AZ-Player.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Arena.py" beforeDir="false" afterPath="$PROJECT_DIR$/Arena.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ArenaTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DotsAndBoxes.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxesGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Players.py" beforeDir="false" afterPath="$PROJECT_DIR$/Players.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DotsAndBoxesGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/DotsAndBoxesGame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DotsAndBoxesNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/keras/DotsAndBoxesNN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCTS.py" beforeDir="false" afterPath="$PROJECT_DIR$/MCTS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NNetWrap.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/keras/NNetWrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeuralNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/NeuralNet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Players.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/Players.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/Convert Keras Model for use with Tensorflow.js.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesGame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesLogic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesPlayers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesServer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/DotsAndBoxesTest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/Play Dots and Boxes using AlphaZero General.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/Train Dots and Boxes using AlphaZero General.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/DotsAndBoxesNNet.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/NNet.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/keras/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/keras/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/main-dotsandboxes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dotsandboxes/pit-dotsandboxes.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/best.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_0.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_1.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_1.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_2.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_3.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_4.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_5.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_6.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_7.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_8.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/checkpoint_9.pth.tar.examples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp/temp.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main2.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pit.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_all_games.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_gamestate.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,12 +81,14 @@
       <recent name="C:\Users\colin\Desktop\AIProject-DotsAndBoxes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/DotsAndBoxes/keras" />
+      <recent name="$PROJECT_DIR$/DotsAndBoxes" />
       <recent name="$PROJECT_DIR$/models/3x3" />
       <recent name="$PROJECT_DIR$/scenarios" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ArenaTest">
+  <component name="RunManager" selected="Python tests.Python tests in test_dotsandboxes.py">
     <configuration name="ArenaTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -122,28 +131,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main2" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="AIProject-DotsAndBoxes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
-      <option name="SDK_NAME" value="Python 3.10 (AIProject-DotsAndBoxes)" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -165,14 +152,52 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="train" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="AIProject-DotsAndBoxes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="SDK_NAME" value="Python 3.10 (AIProject-DotsAndBoxes)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_dotsandboxes.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="AIProject-DotsAndBoxes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test_dotsandboxes.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.trainAlphaZero" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.main2" />
       <item itemvalue="Python.ArenaTest" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python tests.Python tests in test_dotsandboxes.py" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests in test_dotsandboxes.py" />
         <item itemvalue="Python.ArenaTest" />
         <item itemvalue="Python.test" />
       </list>

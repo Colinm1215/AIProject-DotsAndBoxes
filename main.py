@@ -1,5 +1,5 @@
 import time
-from DotsAndBoxesGame import DotsAndBoxesGame as db
+from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame as db
 
 # The program begins by allowing the user to choose from a scenario gamestate or select a new gamestate (a new game).
 # If a scenario is given, the user inputs the current turn for the given scenario.

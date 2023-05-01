@@ -1,9 +1,9 @@
 import os
-
+import random
 import numpy as np
 
 from MCTS import MCTS
-from NNetWrap import NNetWrapper
+from DotsAndBoxes.keras.NNetWrapper import NNetWrapper
 from utils import dotdict
 
 rng = np.random.default_rng()
@@ -170,3 +170,20 @@ class HumanPlayer:
             else:
                 print("Invalid Move")
         return move
+
+
+class RandomPlayer:
+    def __init__(self, game):
+        self.game = game
+        self.name = "Random"
+
+    def play(self, board):
+        valid = self.game.get_valid_moves(board, 1)
+        while True:
+            valid_moves = self.game.get_valid_moves(board, 1)
+            # Select a random move from the list of valid moves
+            valid_moves = np.nonzero(valid_moves)[0]
+            random_idx = np.random.randint(len(valid_moves))
+            random_move = valid_moves[random_idx]
+            if valid[random_move]:
+                return random_move

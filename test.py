@@ -3,8 +3,8 @@ import logging
 
 import numpy as np
 
-from Players import MinimaxPlayer, MCTSPlayer, HumanPlayer
-from DotsAndBoxesGame import DotsAndBoxesGame as db
+from DotsAndBoxes.Players import MinimaxPlayer, MCTSPlayer
+from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame as db
 log = logging.getLogger(__name__)
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 import numpy as np
 import Arena
-from DotsAndBoxesGame import DotsAndBoxesGame
-from Players import HumanPlayer, MCTSPlayer, MinimaxPlayer, AlphaZeroPlayer
+from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame
+from DotsAndBoxes.Players import MCTSPlayer, MinimaxPlayer, AlphaZeroPlayer
 from utils import graph_data
 
 if __name__ == '__main__':
@@ -19,11 +19,9 @@ if __name__ == '__main__':
 
     arena = Arena.Arena(p1.play, p2.play, g, display=DotsAndBoxesGame.display_board)
     oneWon, twoWon, draws, avg_t1, avg_t2, avg_game_time = arena.playGames(numGames, verbose=False, log_data=True)
-    print(
-        "oneWon: {}, twoWon: {}, draws: {}, avgT1: {}, avgT2: {}, avgGameTime: {}".format(oneWon, twoWon, draws,
-                                                                                          np.mean(avg_t1),
-                                                                                          np.mean(avg_t2),
-                                                                                          np.mean(avg_game_time)))
+    print()
+    print("{}: {}, {}: {}, draws: {}, ".format(p1.name, oneWon, p2.name, twoWon, draws))
+    print("avgT1: {}, avgT2: {}, avgGameTime: {}".format(np.mean(avg_t1),np.mean(avg_t2) ,np.mean(avg_game_time)))
     print("Margin of victory: {}".format(max(oneWon, twoWon) - min(oneWon, twoWon)))
     graph_data.graphGameTime(numGames, avg_game_time)
     graph_data.graphAverageTurn(numGames, avg_t1, avg_t2, p1.name, p2.name)
