@@ -39,7 +39,7 @@ class MCTSPlayer:
             random_idx = np.random.randint(len(valid_moves))
             random_move = valid_moves[random_idx]
             # Place the move on the board without checking for a win
-            board, still_turn = self.game.place_move_n(board, cur_player, random_move)
+            board, still_turn = self.game.place_move(board, cur_player, random_move)
             # Switch to the other player
             if not still_turn:
                 cur_player = -cur_player
@@ -62,7 +62,7 @@ class MCTSPlayer:
         # Loop through all valid moves
         for move in valid_moves:
             # Place the move on a copy of the board without checking for a win
-            new_board, still_turn = self.game.place_move_n(new_board, player, move)
+            new_board, still_turn = self.game.place_move(new_board, player, move)
             # Initialize the number of wins for this move
             wins = 0
 
@@ -102,7 +102,7 @@ class MinimaxPlayer:
         if isMaximizingPlayer:
             best_value = float('-inf')
             for move in self.game.get_valid_moves(board, player).nonzero()[0]:
-                new_board, still_turn = self.game.place_move_n(board, player, move)
+                new_board, still_turn = self.game.place_move(board, player, move)
                 if not still_turn:
                     player = -player
                 value = self.minimax(new_board, depth - 1, player, still_turn, alpha, beta)
@@ -114,7 +114,7 @@ class MinimaxPlayer:
         else:
             best_value = float('inf')
             for move in self.game.get_valid_moves(board, player).nonzero()[0]:
-                new_board, still_turn = self.game.place_move_n(board, player, move)
+                new_board, still_turn = self.game.place_move(board, player, move)
                 if not still_turn:
                     player = -player
                 value = self.minimax(new_board, depth - 1, player, still_turn, alpha, beta)
@@ -136,7 +136,7 @@ class MinimaxPlayer:
             return valid_moves[0]
 
         for move in valid_moves:
-            new_board, still_turn = self.game.place_move_n(board, player, move)
+            new_board, still_turn = self.game.place_move(board, player, move)
             if still_turn:
                 value = self.game.evaluate(player, board)
                 value += self.minimax(new_board, self.depth - 1, player, True, float('-inf'), float('inf'))

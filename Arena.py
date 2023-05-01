@@ -69,7 +69,7 @@ class Arena:
                 log.error(f'Action {action} is not valid!')
                 log.debug(f'valids = {valids}')
                 assert valids[action] > 0
-            board, cur_player = self.game.get_next_state(board, cur_player, action)
+            board, cur_player = self.game.get_next_state(board, cur_player, action, True)
         if verbose:
             assert self.display
             print("Game over: Turn ", str(it), "Result ", str(self.game.get_game_ended(board, 1)))

@@ -15,12 +15,12 @@ class DotsAndBoxesGame:
 
     # Creates a new gamestate of a size selected by the user. Used if no scenario is given.
     def create_gameboard(self, size):
-        self.completed_boxes = np.zeros([3, 3], dtype=int)
+        self.completed_boxes = np.zeros([self.n, self.n], dtype=int)
         board = np.zeros((size * 2 + 1, size + 1), dtype=int)
         return board
 
-    @staticmethod
-    def create_board(size):
+    def create_board(self, size):
+        self.completed_boxes = np.zeros([self.n, self.n], dtype=int)
         board = np.zeros((size * 2 + 1, size + 1), dtype=int)
         return board
 
@@ -42,19 +42,22 @@ class DotsAndBoxesGame:
             board[2, -1] = aux
         return board
 
-    @staticmethod
-    def display_board(board):
+    def display_board(self, board):
         n = board.shape[1]
         for i in range(n):
+            print("")
             for j in range(n - 1):
-                s = "*-x-" if board[i][j] else "*---"
+                s = "o x " if board[i][j] else "o   "
                 print(s, end="")
-            print("*")
+            print("o")
             if i < n - 1:
                 for j in range(n):
-                    s = "x   " if board[i + n][j] else "|   "
+                    s = "x " if board[i + n][j] else "| "
+                    if j < n - 1:
+                        a = self.completed_boxes[i][j]
+                        if a != 0:
+                           s += " X "
                     print(s, end="")
-            print("")
         print("Pass: {}".format(board[4, -1]))
         print("Score {} x {}".format(board[0, -1], board[2, -1]))
 
@@ -62,50 +65,7 @@ class DotsAndBoxesGame:
     def stringRepresentation(board):
         return board.tobytes()
 
-    def check_completed_boxes(self, board, move_r, move_c, player, pri, completed_boxes_t=None):
-        # print(f'row:{move_r}, col:{move_c}')
-        if completed_boxes_t is None:
-            completed_boxes_temp = np.copy(self.completed_boxes)
-        else:
-            completed_boxes_temp = completed_boxes_t
-        b = board
-        still_turn = False
-        b1 = 0
-        b2 = 0
-        # if horizontal
-        if move_r % 2 == 0:
-            # find box below
-            if move_r < 2 * self.n:
-                if b1 := b[move_r + 1][move_c] and b[move_r + 2][move_c] and b[move_r + 1][move_c + 1]:
-                    completed_boxes_temp[move_r // 2][move_c] = player
-            # find box above
-            if move_r > 0:
-                if b2 := b[move_r - 2][move_c] and b[move_r - 1][move_c] and b[move_r - 1][move_c + 1]:
-                    completed_boxes_temp[(move_r - 2) // 2][move_c] = player
-            # print(f'Box1: {b1} Box2: {b2}')
-        # is vertical
-        elif move_r % 2 != 0:
-            if move_c < len(b[move_r]) - 1:
-                if b1 := b[move_r][move_c + 1] and b[move_r + 1][move_c] and b[move_r - 1][move_c]:
-                    completed_boxes_temp[(move_r - 1) // 2][move_c] = player
-            if move_c > 0:
-                if b2 := b[move_r][move_c - 1] and b[move_r - 1][move_c - 1] and b[move_r + 1][move_c - 1]:
-                    completed_boxes_temp[(move_r - 1) // 2][move_c - 1] = player
-            # print(f'Box1: {b1} Box2: {b2}')
-        still_turn = b1 or b2
-        if still_turn:
-            if player == 1:
-                board[0][-1] += b1 + b2
-            else:
-                board[2][-1] += b1 + b2
-        self.toggle_turn(board, still_turn)
-        if pri:
-            self.completed_boxes = completed_boxes_temp
-            return still_turn, self.completed_boxes
-        else:
-            return still_turn, completed_boxes_temp
-
-    def check_score(self, board, move_r, move_c, player):
+    def check_score(self, board, move_r, move_c, player, get_boxes=False):
         b = board
         b1 = 0
         b2 = 0
@@ -114,15 +74,23 @@ class DotsAndBoxesGame:
             # find box below
             if move_r < 2 * self.n:
                 b1 = b[move_r + 1][move_c] and b[move_r + 2][move_c] and b[move_r + 1][move_c + 1]
+                if b1 and get_boxes:
+                    self.completed_boxes[move_r // 2][move_c] = player
             # find box above
             if move_r > 0:
                 b2 = b[move_r - 2][move_c] and b[move_r - 1][move_c] and b[move_r - 1][move_c + 1]
+                if b2 and get_boxes:
+                    self.completed_boxes[(move_r - 2) // 2][move_c] = player
         # is vertical
         elif move_r % 2 != 0:
             if move_c < len(b[move_r]) - 1:
                 b1 = b[move_r][move_c + 1] and b[move_r + 1][move_c] and b[move_r - 1][move_c]
+                if b1 and get_boxes:
+                    self.completed_boxes[(move_r - 1) // 2][move_c] = player
             if move_c > 0:
                 b2 = b[move_r][move_c - 1] and b[move_r - 1][move_c - 1] and b[move_r + 1][move_c - 1]
+                if b2 and get_boxes:
+                    self.completed_boxes[(move_r - 1) // 2][move_c - 1] = player
         still_turn = b1 or b2
         if still_turn:
             if player == 1:
@@ -131,16 +99,16 @@ class DotsAndBoxesGame:
                 board[2][-1] += b1 + b2
         return still_turn
 
-    def get_next_state(self, board, player, action):
+    def get_next_state(self, board, player, action, get_boxes=False):
         b = np.copy(board)
         if action == self.action_size - 1:
             b[4, -1] = 0
         else:
-            b, still_turn = self.place_move_n(b, player, action)
+            b, still_turn = self.place_move(b, player, action, get_boxes)
             b[4, -1] = still_turn
         return b, -player
 
-    def place_move_n(self, board, player, action):
+    def place_move(self, board, player, action, get_boxes=False):
         if action == self.action_size - 1:
             board[4][-1] = 0
             return board, False
@@ -152,29 +120,8 @@ class DotsAndBoxesGame:
             move = ((action // (self.n + 1)) * 2 + 1, action % (self.n + 1))
         (move_r, move_c) = move
         board[move_r][move_c] = 1
-        still_turn = self.check_score(board, move_r, move_c, player)
+        still_turn = self.check_score(board, move_r, move_c, player, get_boxes)
         return board, still_turn
-
-    def place_move(self, board, player, action, print, completed_boxes_t=None):
-        # assert self.is_still_turn(board) == 0
-        is_horizontal = action < self.n * (self.n + 1)
-        if is_horizontal:
-            move = ((action // self.n) * 2, action % self.n)
-        else:
-            action -= self.n * (self.n + 1)
-            move = ((action // (self.n + 1)) * 2 + 1, action % (self.n + 1))
-        (move_r, move_c) = move
-        board[move_r][move_c] = 1
-        still_turn, completed_boxes = self.check_completed_boxes(board, move_r, move_c, player, print,
-                                                                 completed_boxes_t)
-        return board, still_turn, completed_boxes
-
-    # Checks if moves are valid and how they should be made (horizontal or vertical). Adds player # to completed boxes.
-    def place_move_coords(self, board, player, move_r, move_c, print, completed_boxes_t=None):
-        board[move_r][move_c] = 1
-        still_turn, completed_boxes = self.check_completed_boxes(board, move_r, move_c, player, print,
-                                                                 completed_boxes_t)
-        return board, still_turn, completed_boxes
 
     # Checks if the game is finished and if so, who the winner is.
     # Returns 0 if board not finished.
