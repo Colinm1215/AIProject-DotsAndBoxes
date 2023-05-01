@@ -26,8 +26,8 @@ args = dotdict({
     'numItersForTrainExamplesHistory': 20,
 })
 
-args['numIters'] = 30
-args['numEps'] = 50
+args['numIters'] = 20
+args['numEps'] = 30
 args['arenaCompare'] = 40
 
 
