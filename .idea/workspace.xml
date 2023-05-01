@@ -7,12 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Organizing Files">
+    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Removing old code">
+      <change beforePath="$PROJECT_DIR$/.idea/AIProject-DotsAndBoxes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AIProject-DotsAndBoxes.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Arena.py" beforeDir="false" afterPath="$PROJECT_DIR$/Arena.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ArenaTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DotsAndBoxes/DotsAndBoxesGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/DotsAndBoxesGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DotsAndBoxes/Players.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/Players.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,7 @@
       <recent name="$PROJECT_DIR$/scenarios" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.ArenaTest">
     <configuration name="ArenaTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -160,7 +163,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.trainAlphaZero" />
+      <item itemvalue="Python.train" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.ArenaTest" />
       <item itemvalue="Python.test" />
@@ -168,8 +171,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.ArenaTest" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python tests.Python tests in test_dotsandboxes.py" />
       </list>
     </recent_temporary>
@@ -253,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682906598833</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Removing old code">
+      <created>1682909111807</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682909111807</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,7 +288,8 @@
     <MESSAGE value="Training Settings" />
     <MESSAGE value="Requirements" />
     <MESSAGE value="Organizing Files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Organizing Files" />
+    <MESSAGE value="Removing old code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing old code" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

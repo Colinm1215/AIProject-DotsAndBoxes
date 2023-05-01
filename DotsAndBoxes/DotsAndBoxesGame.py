@@ -1,3 +1,4 @@
+from colorama import Fore, Back, Style
 import numpy as np
 
 
@@ -42,24 +43,33 @@ class DotsAndBoxesGame:
             board[2, -1] = aux
         return board
 
+    @staticmethod
+    def get_score(board):
+        return board[0, -1], board[2, -1]
+
     def display_board(self, board):
         n = board.shape[1]
-        for i in range(n):
-            print("")
-            for j in range(n - 1):
-                s = "o x " if board[i][j] else "o   "
-                print(s, end="")
-            print("o")
-            if i < n - 1:
-                for j in range(n):
-                    s = "x " if board[i + n][j] else "| "
-                    if j < n - 1:
-                        a = self.completed_boxes[i][j]
-                        if a != 0:
-                           s += " X "
+        for i in range(n * 2 - 1):
+            if i % 2 == 0:
+                for j in range(n - 1):
+                    s = "o---" if board[i][j] else "o   "
                     print(s, end="")
-        print("Pass: {}".format(board[4, -1]))
-        print("Score {} x {}".format(board[0, -1], board[2, -1]))
+                print("o")
+            else:
+                for j in range(n):
+                    s = "|" if board[i][j] else " "
+                    print(s, end="")
+                    if j < n - 1:
+                        a = self.completed_boxes[i // 2][j]
+                        if a == 1:
+                            print(f" {Fore.RED}X{Style.RESET_ALL} ", end="")
+                        elif a == -1:
+                            print(f" {Fore.BLUE}X{Style.RESET_ALL} ", end="")
+                        else:
+                            print("   ", end="")
+                print("")
+        print(f"Pass: {board[4, -1]}")
+        print(f"Score {Fore.RED}{board[0, -1]}{Style.RESET_ALL} x {Fore.BLUE}{board[2, -1]}{Style.RESET_ALL}")
 
     @staticmethod
     def stringRepresentation(board):

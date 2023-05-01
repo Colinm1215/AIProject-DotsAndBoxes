@@ -52,8 +52,8 @@ class Arena:
             it += 1
             if verbose:
                 assert self.display
-                print("Turn ", str(it), "Player ", str(cur_player))
-                self.display(board)
+                # print("Turn ", str(it), "Player ", str(cur_player))
+                # self.display(board)
             if log_data:
                 turn_start = time.perf_counter()
 
@@ -72,14 +72,17 @@ class Arena:
             board, cur_player = self.game.get_next_state(board, cur_player, action, True)
         if verbose:
             assert self.display
+            print("")
+            self.display(self.game, board)
             print("Game over: Turn ", str(it), "Result ", str(self.game.get_game_ended(board, 1)))
-            self.display(board)
         if log_data:
             game_end = time.perf_counter()
             game_time = round((game_end - game_start), 4)
             turn_times = turn_times[:it]
+            s1, s2 = self.game.get_score(board)
+            margin = max(s1, s2) - min(s1, s2)
             return cur_player * self.game.get_game_ended(board, cur_player), np.mean(turn_times[::2]), np.mean(
-                turn_times[1::2]), game_time
+                turn_times[1::2]), game_time, margin
         else:
             return cur_player * self.game.get_game_ended(board, cur_player)
 
@@ -99,16 +102,19 @@ class Arena:
         avg_turn_p1 = []
         avg_turn_p2 = []
         avg_game_time = []
+        avg_margin = []
         if log_data:
             avg_turn_p1 = np.zeros(num)
             avg_turn_p2 = np.zeros(num)
             avg_game_time = np.zeros(num)
+            avg_margin = np.zeros(num)
         for i in tqdm(range(num), desc="Arena.playGames (1)"):
             if log_data:
-                game_result, avg_turn1, avg_turn2, game_time = self.playGame(verbose=verbose, log_data=log_data)
+                game_result, avg_turn1, avg_turn2, game_time, margin = self.playGame(verbose=verbose, log_data=log_data)
                 avg_turn_p1 = np.insert(avg_turn_p1, i, avg_turn1)
                 avg_turn_p2 = np.insert(avg_turn_p2, i, avg_turn2)
                 avg_game_time = np.insert(avg_game_time, i, game_time)
+                avg_margin = np.insert(avg_game_time, i, margin)
             else:
                 game_result = self.playGame(verbose=verbose)
             if game_result == 1:
@@ -121,10 +127,11 @@ class Arena:
 
         for i in tqdm(range(num), desc="Arena.playGames (2)"):
             if log_data:
-                game_result, avg_turn1, avg_turn2, game_time = self.playGame(verbose=verbose, log_data=log_data)
+                game_result, avg_turn1, avg_turn2, game_time, margin = self.playGame(verbose=verbose, log_data=log_data)
                 avg_turn_p1 = np.insert(avg_turn_p1, i + num, avg_turn2)
                 avg_turn_p2 = np.insert(avg_turn_p2, i + num, avg_turn1)
                 avg_game_time = np.insert(avg_game_time, i + num, game_time)
+                avg_margin = np.insert(avg_game_time, i + num, margin)
             else:
                 game_result = self.playGame(verbose=verbose)
             if game_result == -1:
@@ -136,6 +143,6 @@ class Arena:
 
         if log_data:
             return one_won, two_won, draws, np.trim_zeros(avg_turn_p1), np.trim_zeros(avg_turn_p2), np.trim_zeros(
-                avg_game_time)
+                avg_game_time), np.trim_zeros(avg_margin)
         else:
             return one_won, two_won, draws
