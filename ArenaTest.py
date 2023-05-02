@@ -9,11 +9,11 @@ if __name__ == '__main__':
 
     n1p = AlphaZeroPlayer(g, "./models/3x3", 50)
     mmp1 = MinimaxPlayer(g, 20)
-    mctsp2 = MCTSPlayer(g, 500)
-    mctsp1 = MCTSPlayer(g, 500)
+    mctsp2 = MCTSPlayer(g, 5000)
+    mctsp1 = MCTSPlayer(g, 50)
 
     p1 = mctsp1
-    p2 = n1p
+    p2 = mmp1
 
     numGames = 20
 

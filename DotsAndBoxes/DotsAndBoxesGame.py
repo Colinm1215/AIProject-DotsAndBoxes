@@ -141,7 +141,7 @@ class DotsAndBoxesGame:
     def check_win(self, board):
         player1_count = board[0][-1]
         player2_count = board[2][-1]
-        if self.has_valid_moves(board):
+        if not (np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :])):
             return 0
         else:
             if player1_count > player2_count:
@@ -180,10 +180,13 @@ class DotsAndBoxesGame:
                                 axis=0)
         return valid_moves
 
-    def get_valid_moves(self, board, player):
+    @staticmethod
+    def get_valid_moves(board, player=1):
+        size = (board.shape[1]-1)*2 + 1
         valid_moves = np.logical_not(board)
-        valid_moves = np.hstack((valid_moves[:self.board_size[0]:2, :-1].flatten(),
-                                 valid_moves[1:self.board_size[0]:2, :].flatten(), False))
+        valid_moves = np.hstack((valid_moves[:size:2, :-1].flatten(),
+                                 valid_moves[1:size:2, :].flatten(), False))
+        # if pass, set all moves to false
         if board[4, -1]:
             valid_moves[:] = False
             valid_moves[-1] = True
@@ -242,3 +245,9 @@ class DotsAndBoxesGame:
             pi_horizontal = pi_vertical
             pi_vertical = aux
         return l
+
+    # def playScenario(self, agent, scenario):
+    #     board = self.read_gamestate(scenario)
+    #     action = agent.play(board)
+    #     b, _ = self.get_next_state(board, 1, action)
+    #     return b
