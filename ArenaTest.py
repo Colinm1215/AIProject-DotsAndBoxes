@@ -8,12 +8,14 @@ if __name__ == '__main__':
     g = DotsAndBoxesGame(3)
 
     n1p = AlphaZeroPlayer(g, "./models/3x3", 50)
+    n2p = AlphaZeroPlayer(g, "./models/3x3", 50)
     mmp1 = MinimaxPlayer(g, 20)
+    mmp2 = MinimaxPlayer(g, 20)
     mctsp2 = MCTSPlayer(g, 500)
     mctsp1 = MCTSPlayer(g, 500)
 
     p1 = mctsp1
-    p2 = n1p
+    p2 = mmp1
 
     numGames = 20
 

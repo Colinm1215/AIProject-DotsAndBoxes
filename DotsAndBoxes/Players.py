@@ -1,12 +1,10 @@
 import os
-import random
 import numpy as np
 
-from MCTS import MCTS
 from DotsAndBoxes.keras.NNetWrapper import NNetWrapper
+from MCTS import MCTS
 from utils import dotdict
-
-rng = np.random.default_rng()
+# from simulate import simulate
 
 
 class AlphaZeroPlayer:
@@ -28,23 +26,26 @@ class MCTSPlayer:
         self.name = "MCTS"
 
     # Simulates a random playout from the current game board until the game ends
-    def simulate(self, board, player):
+    @staticmethod
+    def simulate(game, board, player):
         # Continue simulating moves while the game is ongoing
         cur_player = player
-        while self.game.check_win(board) == 0:
+        b = np.array(board, order='K', copy=True)
+        while game.check_win(b) == 0:
             # Get a list of valid moves
-            valid_moves = self.game.get_valid_moves(board, cur_player)
+            valid_moves = game.get_valid_moves(b, cur_player)
+
             # Select a random move from the list of valid moves
             valid_moves = np.nonzero(valid_moves)[0]
             random_idx = np.random.randint(len(valid_moves))
             random_move = valid_moves[random_idx]
             # Place the move on the board without checking for a win
-            board, still_turn = self.game.place_move(board, cur_player, random_move)
+            b, still_turn = game.place_move(b, cur_player, random_move)
             # Switch to the other player
             if not still_turn:
                 cur_player = -cur_player
         # Return the game result
-        return self.game.check_win(board)
+        return game.check_win(b)
 
     # Monte Carlo Tree Search function
     def play(self, board):
@@ -52,9 +53,9 @@ class MCTSPlayer:
         best_move = None
         best_score = float('-inf')
         player = 1
-        new_board = np.copy(board)
+        # new_board = np.copy(board)
         # Get a list of valid moves
-        valid_moves = np.nonzero(self.game.get_valid_moves(new_board, 1))[0]
+        valid_moves = np.nonzero(self.game.get_valid_moves(board, 1))[0]
         # # If there's only one valid move, return it immediately
         if len(valid_moves) == 1:
             return valid_moves[0]
@@ -62,15 +63,16 @@ class MCTSPlayer:
         # Loop through all valid moves
         for move in valid_moves:
             # Place the move on a copy of the board without checking for a win
-            new_board, still_turn = self.game.place_move(new_board, player, move)
+            new_board, still_turn = self.game.place_move(np.array(board, order='K', copy=True), player, move)
             # Initialize the number of wins for this move
             wins = 0
 
             # Perform a specified number of simulations for this move
             for _ in range(self.depth):
                 # Simulate a random playout and get the game result
-                simulation_result = self.simulate(new_board, player)
+                # simulation_result = self.simulate(self.game, new_board, player)
                 # If the result is a win for the current player, increment the wins counter
+                simulation_result = self.simulate(self.game,new_board, player)
                 if simulation_result == 1:
                     wins += 1
 
@@ -136,7 +138,7 @@ class MinimaxPlayer:
             return valid_moves[0]
 
         for move in valid_moves:
-            new_board, still_turn = self.game.place_move(board, player, move)
+            new_board, still_turn = self.game.place_move(np.array(board, order='K', copy=True), player, move)
             if still_turn:
                 value = self.game.evaluate(player, board)
                 value += self.minimax(new_board, self.depth - 1, player, True, float('-inf'), float('inf'))

@@ -1,6 +1,4 @@
 import numpy as np
-# import sys
-# sys.path.append('..')
 import os
 from utils import dotdict
 from NeuralNet import NeuralNet
