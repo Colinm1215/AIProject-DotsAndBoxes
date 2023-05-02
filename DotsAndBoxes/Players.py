@@ -3,7 +3,7 @@ import random
 import numpy as np
 
 from MCTS import MCTS
-from DotsAndBoxes.keras.NNetWrapper import NNetWrapper
+from dotsandboxes.keras.NNetWrapper import NNetWrapper
 from utils import dotdict
 
 rng = np.random.default_rng()

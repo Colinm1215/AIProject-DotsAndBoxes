@@ -1,21 +1,23 @@
 import numpy as np
 import Arena
-from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame
-from DotsAndBoxes.Players import MCTSPlayer, MinimaxPlayer, AlphaZeroPlayer
+from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame
+from dotsandboxes.Players import MCTSPlayer, MinimaxPlayer, AlphaZeroPlayer
 from utils import graph_data
 
 if __name__ == '__main__':
     g = DotsAndBoxesGame(3)
 
     n1p = AlphaZeroPlayer(g, "./models/3x3", 50)
-    mmp1 = MinimaxPlayer(g, 20)
+    mmp1 = MinimaxPlayer(g, 8)
     mctsp2 = MCTSPlayer(g, 500)
     mctsp1 = MCTSPlayer(g, 500)
+    mmp2 = MinimaxPlayer(g, 8)
+    n2p = AlphaZeroPlayer(g, "./models/3x3", 50)
 
+    p2 = n2p
     p1 = mctsp1
-    p2 = n1p
 
-    numGames = 20
+    numGames = 50
 
     arena = Arena.Arena(p1.play, p2.play, g, display=DotsAndBoxesGame.display_board)
     oneWon, twoWon, draws, avg_t1, avg_t2, avg_game_time, avg_margin = arena.playGames(numGames, verbose=False, log_data=True)
