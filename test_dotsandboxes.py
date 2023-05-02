@@ -32,12 +32,10 @@ class TestDotsAndBoxes(unittest.TestCase):
         play_scenarios_MCTS(3, scenarios3x3)
         print("")
 
-    # def test_get_valid_moves(self):
-    #     g = db(3)
-    #     b = g.create_board(3)
-    #     print(b.shape[1])
-    #     v = get_valid_moves(b, 1)
-    #     print(v)
+    def test_scenarios3x3AlphaZero(self):
+        print("Testing Alpha Zero 3x3")
+        play_scenarios_AlphaZero(3, scenarios3x3)
+        print("")
 
 
 def play_scenarios_MCTS(size, scenarios, sims=500):
@@ -50,6 +48,12 @@ def play_scenarios_minimax(size, scenarios, depth=40):
     g = db(size)
     mmp1 = MinimaxPlayer(g, depth)
     testScenarios(g, scenarios, mmp1)
+
+
+def play_scenarios_AlphaZero(size, scenarios, sims=50):
+    g = db(size)
+    n1p = AlphaZeroPlayer(g, f'./models/{size}x{size}', sims)
+    testScenarios(g, scenarios, n1p)
 
 
 def testScenarios(game, scenarios, agent, test_num=10):
