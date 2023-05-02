@@ -114,7 +114,7 @@ class Arena:
                 avg_turn_p1 = np.insert(avg_turn_p1, i, avg_turn1)
                 avg_turn_p2 = np.insert(avg_turn_p2, i, avg_turn2)
                 avg_game_time = np.insert(avg_game_time, i, game_time)
-                avg_margin = np.insert(avg_game_time, i, margin)
+                avg_margin = np.insert(avg_margin, i, margin)
             else:
                 game_result = self.playGame(verbose=verbose)
             if game_result == 1:
@@ -131,7 +131,7 @@ class Arena:
                 avg_turn_p1 = np.insert(avg_turn_p1, i + num, avg_turn2)
                 avg_turn_p2 = np.insert(avg_turn_p2, i + num, avg_turn1)
                 avg_game_time = np.insert(avg_game_time, i + num, game_time)
-                avg_margin = np.insert(avg_game_time, i + num, margin)
+                avg_margin = np.insert(avg_margin, i + num, margin)
             else:
                 game_result = self.playGame(verbose=verbose)
             if game_result == -1:

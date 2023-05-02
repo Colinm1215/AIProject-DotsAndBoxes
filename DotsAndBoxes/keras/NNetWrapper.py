@@ -4,7 +4,7 @@ import numpy as np
 import os
 from utils import dotdict
 from NeuralNet import NeuralNet
-from DotsAndBoxes.keras.DotsAndBoxesNN import DotsAndBoxesNNet as onnet
+from dotsandboxes.keras.DotsAndBoxesNN import DotsAndBoxesNNet as onnet
 
 args = dotdict({
     'lr': 0.001,
