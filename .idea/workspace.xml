@@ -9,10 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Display Fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arena.py" beforeDir="false" afterPath="$PROJECT_DIR$/Arena.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ArenaTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DotsAndBoxes/Players.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/Players.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DotsAndBoxes/keras/NNetWrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/keras/NNetWrapper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

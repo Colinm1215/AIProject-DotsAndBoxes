@@ -15,9 +15,9 @@ if __name__ == '__main__':
     n2p = AlphaZeroPlayer(g, "./models/3x3", 50)
 
     p2 = n2p
-    p1 = mctsp1
+    p1 = n1p
 
-    numGames = 50
+    numGames = 40
 
     arena = Arena.Arena(p1.play, p2.play, g, display=DotsAndBoxesGame.display_board)
     oneWon, twoWon, draws, avg_t1, avg_t2, avg_game_time, avg_margin = arena.playGames(numGames, verbose=False, log_data=True)
