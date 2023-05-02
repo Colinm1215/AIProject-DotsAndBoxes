@@ -6,8 +6,6 @@ from MCTS import MCTS
 from utils import dotdict
 # from simulate import simulate
 
-rng = np.random.default_rng()
-
 
 class AlphaZeroPlayer:
     def __init__(self, game, checkpoint_dir, num_sims):
@@ -32,7 +30,6 @@ class MCTSPlayer:
     def simulate(game, board, player):
         # Continue simulating moves while the game is ongoing
         cur_player = player
-        # b = board
         b = np.array(board, order='K', copy=True)
         while game.check_win(b) == 0:
             # Get a list of valid moves
