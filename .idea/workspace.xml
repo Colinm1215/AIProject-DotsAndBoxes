@@ -7,9 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Display Fix">
+    <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Reorganize Files">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/Dockerfile.pytorch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/jupyter_notebook_config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/run_jupyter.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArenaTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArenaTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlphaZero/Coach.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlphaZero/Coach.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arena.py" beforeDir="false" afterPath="$PROJECT_DIR$/Arena.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compete.py" beforeDir="false" afterPath="$PROJECT_DIR$/Compete.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DotsAndBoxes/Players.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/Players.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/5x5/best.h5" beforeDir="false" afterPath="$PROJECT_DIR$/models/5x5/best.h5" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +38,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3bf10a73-39ce-4b3c-ad7f-8051f9be5950" />
+        <option name="url" value="https://github.com/Colinm1215/AIProject-DotsAndBoxes.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -38,39 +63,41 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/chlo/Documents/PycharmProjects/AIProject-DotsAndBoxes/main2.py&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/chlo/Documents/PycharmProjects/AIProject-DotsAndBoxes&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/scenarios" />
       <recent name="C:\Users\jarre\Desktop\WPI MCS Course Work\Spring 2023\CS534\Project\AIProject-DotsAndBoxes" />
       <recent name="C:\Users\colin\Desktop\AIProject-DotsAndBoxes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docker" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/DotsAndBoxes/keras" />
-      <recent name="$PROJECT_DIR$/DotsAndBoxes" />
-      <recent name="$PROJECT_DIR$/models/3x3" />
-      <recent name="$PROJECT_DIR$/scenarios" />
+      <recent name="$PROJECT_DIR$/AlphaZero" />
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/DotsAndBoxes/AlphaZero" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ArenaTest">
-    <configuration name="ArenaTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.python main.py">
+    <configuration name="Compete" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Anaconda\python.exe" />
-      <option name="SDK_NAME" value="Python 3.9" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="SDK_NAME" value="Python 3.10 (AIProject-DotsAndBoxes)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ArenaTest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Compete.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -100,19 +127,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="python main.py" type="PythonConfigurationType" factoryName="Python">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="SDK_NAME" value="Python 3.10 (AIProject-DotsAndBoxes)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -142,7 +170,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in test_dotsandboxes.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="train5x5" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AIProject-DotsAndBoxes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train5x5.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_model_sum" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -152,22 +201,55 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test_dotsandboxes.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test.test_dotsandboxes.TestDotsAndBoxes.test_model_sum&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3MCTS" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="AIProject-DotsAndBoxes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3MCTS&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3Minimax" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="AIProject-DotsAndBoxes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3Minimax&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.python main.py" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.train" />
-      <item itemvalue="Python.ArenaTest" />
-      <item itemvalue="Python.test" />
-      <item itemvalue="Python tests.Python tests in test_dotsandboxes.py" />
+      <item itemvalue="Python.Compete" />
+      <item itemvalue="Python.train5x5" />
+      <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_model_sum" />
+      <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3MCTS" />
+      <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3Minimax" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ArenaTest" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python tests.Python tests in test_dotsandboxes.py" />
+        <item itemvalue="Python.Compete" />
+        <item itemvalue="Python.train5x5" />
+        <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3MCTS" />
+        <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3Minimax" />
+        <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_model_sum" />
       </list>
     </recent_temporary>
   </component>
@@ -264,7 +346,63 @@
       <option name="project" value="LOCAL" />
       <updated>1682967992883</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Training Files">
+      <created>1682974376706</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682974376706</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Training Files">
+      <created>1682974418902</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1682974418902</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Training Files Edit">
+      <created>1682974712733</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1682974712733</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Minimax Fix">
+      <created>1683046184724</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1683046184724</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Players Edit">
+      <created>1683046744238</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1683046744238</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added AlphaZero 3x3 Scenario tests">
+      <created>1683047212867</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1683047212867</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Changed get game ended">
+      <created>1683076966905</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1683076966905</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Reorganize Files">
+      <created>1683083250476</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1683083250476</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -291,7 +429,14 @@
     <MESSAGE value="Organizing Files" />
     <MESSAGE value="Removing old code" />
     <MESSAGE value="Display Fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Display Fix" />
+    <MESSAGE value="Training Files" />
+    <MESSAGE value="Training Files Edit" />
+    <MESSAGE value="Minimax Fix" />
+    <MESSAGE value="Players Edit" />
+    <MESSAGE value="Added AlphaZero 3x3 Scenario tests" />
+    <MESSAGE value="Changed get game ended" />
+    <MESSAGE value="Reorganize Files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reorganize Files" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

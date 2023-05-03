@@ -71,7 +71,7 @@ class MCTSPlayer:
                 # Simulate a random playout and get the game result
                 # simulation_result = self.simulate(self.game, new_board, player)
                 # If the result is a win for the current player, increment the wins counter
-                simulation_result = self.simulate(self.game,new_board, player)
+                simulation_result = self.simulate(self.game, new_board, player)
                 if simulation_result == 1:
                     wins += 1
 

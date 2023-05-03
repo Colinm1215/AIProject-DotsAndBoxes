@@ -1,5 +1,34 @@
-import time
+import numpy as np
+from Arena import Arena
 from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame as db
+from DotsAndBoxes.Players import MinimaxPlayer, MCTSPlayer, HumanPlayer, AlphaZeroPlayer
+
+
+def getPlayerType(game, player_num):
+    player_type = 0
+    player = None
+    while player_type == 0:
+        player_type = int(input(f"Please enter player {player_num}'s play type\n"
+                                "1.) manual\n"
+                                "2.) minimax\n"
+                                "3.) mcts\n"
+                                "4.) alphaZero\n"))
+        if player_type == 1:
+            player = HumanPlayer(game, 0)
+        elif player_type == 2:
+            depth = int(input("At what max_depth should the minimax algorithm search to find a move? : "))
+            player = MinimaxPlayer(game, depth)
+        elif player_type == 3:
+            sims = int(input("How many simulations should MCTS use to find a move? : "))
+            player = MCTSPlayer(game, sims)
+        elif player_type == 4:
+            sims = int(input("How many simulations should AlphaZero's MCTS use?: "))
+            player = AlphaZeroPlayer(game, f"./models/{size}x{size}", sims)
+        else:
+            print("Invalid Type")
+            player_type = 0
+    return player
+
 
 # The program begins by allowing the user to choose from a scenario gamestate or select a new gamestate (a new game).
 # If a scenario is given, the user inputs the current turn for the given scenario.
@@ -10,80 +39,21 @@ from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame as db
 # The board is evaluated after each turn to determine if it is over. If so, a result is displayed.
 # The time of each turn and overall game is tracked.
 if __name__ == '__main__':
-    filename = input("Please enter the name of the gamestate file to read in, or enter \"new\" : ")
-    board = []
-    turn_inp = "no"
-    g = db(3)
-    if filename == "new":
-        size = int(input("Please enter the size of the new board : "))
-        board = g.create_board(size)
-    else:
-        turn_inp = input("Scenario Testing - Enter current turn number or enter 'no': ")
-        board = g.read_gamestate(filename)
+    size = 0
+    while size == 0:
+        size = int(input("Enter game board size (3 or 5): "))
+        if not (size == 3 or size == 5):
+            print("Invalid Size")
+            size = 0
 
-    player1_type = "none"
-    depth_player1 = 0
-    while player1_type == "none":
-        player1_type = input("Please enter player 1's play type [manual, minimax, mcts] : ")
-        if player1_type == "minimax":
-            depth_player1 = int(input("At what max_depth should the minimax algorithm search to find a move? : "))
-        elif player1_type == "mcts":
-            depth_player1 = int(input("How many simulations should MCTS use to find a move? : "))
-        elif player1_type == "manual":
-            continue
-        else:
-            print("Invalid Type")
-            player1_type = "none"
+    game = db(size)
+    p1 = getPlayerType(game, 1)
+    p2 = getPlayerType(game, 2)
 
-    player2_type = "none"
-    depth_player2 = 0
-    while player2_type == "none":
-        player2_type = input("Please enter player 2's play type [manual, minimax, mcts] : ")
-        if player2_type == "minimax":
-            depth_player2 = int(input("At what max_depth should the minimax algorithm search to find a move? : "))
-        elif player2_type == "mcts":
-            depth_player2 = int(input("How many simulations should MCTS use to find a move? : "))
-        elif player2_type == "manual":
-            continue
-        else:
-            print("Invalid Type")
-            player2_type = "none"
-
-    done = False
-    if turn_inp == 'no':
-        turn = 1
-    else:
-        turn = int(turn_inp)
-    g.print_board(board)
-    game_start = time.perf_counter()
-
-    while not done:
-        turn_start = time.perf_counter()
-        if turn % 2 == 0:
-            print("Player 2's turn!")
-            board, still_turn = g.switch_for_turn_type(board, 2, depth_player2, player2_type)
-        else:
-            print("Player 1's turn!")
-            board, still_turn = g.switch_for_turn_type(board, 1, depth_player1, player1_type)
-
-        g.print_board(board)
-        turn_end = time.perf_counter()
-        turn_time = round((turn_end - turn_start), 4)
-        print('Turn time: ' + str(turn_time) + ' seconds' + '\n')
-        print(g.completed_boxes)
-        win_check = g.check_win(board)
-
-        if win_check > 0:
-            done = True
-        if win_check == 1:
-            print("Player 1 has won the game!")
-        elif win_check == 2:
-            print("Player 2 has won the game!")
-        elif win_check == 3:
-            print("The game has been tied!")
-        if not still_turn:
-            turn += 1
-
-    game_end = time.perf_counter()
-    game_time = round((game_end - game_start), 3)
-    print('Game time: ' + str(game_time) + ' seconds' + '\n')
+    numGames = int(input("How many games should be simulated?: "))
+    arena = Arena(p1.play, p2.play, game, display=game.display_board)
+    oneWon, twoWon, draws, avg_t1, avg_t2, avg_game_time, avg_margin = arena.playGames(numGames, verbose=True,
+                                                                                       log_data=True)
+    print()
+    print("{}: {}, {}: {}, draws: {}, ".format(p1.name, oneWon, p2.name, twoWon, draws))
+    print("avgT1: {}, avgT2: {}, avgGameTime: {}".format(np.mean(avg_t1), np.mean(avg_t2), np.mean(avg_game_time)))

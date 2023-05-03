@@ -5,20 +5,18 @@ from DotsAndBoxes.Players import MCTSPlayer, MinimaxPlayer, AlphaZeroPlayer
 from graphDataUtils import graph_data
 
 if __name__ == '__main__':
-    g = DotsAndBoxesGame(3)
+    size = 5
+    numGames = 2
 
-    n1p = AlphaZeroPlayer(g, "./models/3x3", 50)
-    n2p = AlphaZeroPlayer(g, "./models/3x3", 50)
+    g = DotsAndBoxesGame(size)
+    n1p = AlphaZeroPlayer(g, f"./models/{size}x{size}", 50)
+    n2p = AlphaZeroPlayer(g, f"./models/{size}x{size}", 50)
     mmp1 = MinimaxPlayer(g, 20)
     mmp2 = MinimaxPlayer(g, 20)
     mctsp2 = MCTSPlayer(g, 500)
     mctsp1 = MCTSPlayer(g, 50)
-
-    p1 = n1p
-    p2 = mmp1
-
-    numGames = 2
-
+    p1 = mmp1
+    p2 = n1p
     arena = Arena.Arena(p1.play, p2.play, g, display=DotsAndBoxesGame.display_board)
     oneWon, twoWon, draws, avg_t1, avg_t2, avg_game_time, avg_margin = arena.playGames(numGames, verbose=True, log_data=True)
     print()

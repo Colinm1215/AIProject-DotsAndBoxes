@@ -1,3 +1,4 @@
+# Modified from https://github.com/suragnair/alpha-zero-general
 import logging
 import time
 
@@ -53,7 +54,7 @@ class Arena:
             if verbose:
                 assert self.display
                 print("Turn ", str(it), "Player ", str(cur_player))
-                self.display(self.game, board)
+                self.display(board)
 
             if log_data:
                 turn_start = time.perf_counter()
@@ -70,11 +71,12 @@ class Arena:
                 log.error(f'Action {action} is not valid!')
                 log.debug(f'valids = {valids}')
                 assert valids[action] > 0
+
             board, cur_player = self.game.get_next_state(board, cur_player, action, True)
         if verbose:
             assert self.display
             print("")
-            self.display(self.game, board)
+            self.display(board)
             print("Game over: Turn ", str(it), "Result ", str(self.game.get_game_ended(board, 1)))
         if log_data:
             game_end = time.perf_counter()
