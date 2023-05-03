@@ -47,29 +47,33 @@ class DotsAndBoxesGame:
     def get_score(board):
         return board[0, -1], board[2, -1]
 
-    def display_board(self, board):
+    def create_display_grid(self, board):
         n = board.shape[1]
+        board_str = ""
         for i in range(n * 2 - 1):
             if i % 2 == 0:
                 for j in range(n - 1):
-                    s = "o---" if board[i][j] else "o   "
-                    print(s, end="")
-                print("o")
+                    board_str += "o---" if board[i][j] else "o   "
+                board_str += "o\n"
             else:
                 for j in range(n):
-                    s = "|" if board[i][j] else " "
-                    print(s, end="")
+                    board_str += "|" if board[i][j] else " "
                     if j < n - 1:
                         a = self.completed_boxes[i // 2][j]
                         if a == 1:
-                            print(f" {Fore.RED}X{Style.RESET_ALL} ", end="")
+                            board_str += f" {Fore.RED}X{Style.RESET_ALL} "
                         elif a == -1:
-                            print(f" {Fore.BLUE}X{Style.RESET_ALL} ", end="")
+                            board_str += f" {Fore.BLUE}X{Style.RESET_ALL} "
                         else:
-                            print("   ", end="")
-                print("")
-        print(f"Pass: {board[4, -1]}")
-        print(f"Score {Fore.RED}{board[0, -1]}{Style.RESET_ALL} x {Fore.BLUE}{board[2, -1]}{Style.RESET_ALL}")
+                            board_str += "   "
+                board_str += "\n"
+        board_str += f"Pass: {board[4, -1]}\n"
+        board_str += f"Score: {Fore.RED}{board[0, -1]}{Style.RESET_ALL} x {Fore.BLUE}{board[2, -1]}{Style.RESET_ALL}\n"
+        return board_str
+
+    def display_board(self, board):
+        board_str = self.create_display_grid(board)
+        print(f'{board_str}')
 
     @staticmethod
     def stringRepresentation(board):
@@ -153,11 +157,13 @@ class DotsAndBoxesGame:
 
     def get_game_ended(self, board, player):
         # return 0 if not ended, 1 if player 1 won, -1 if player 1 lost
-        if self.has_valid_moves(board):
-            return 0
 
+        # Has valid moves
+        if not np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :]):
+            return 0
+        # Draw is counted as loss
         if board[0][-1] == board[2][-1]:
-            return 2
+            return -player
         else:
             player_1_won = board[0][-1] > board[2][-1]
             return 1 * player if player_1_won else -1 * player
@@ -180,9 +186,10 @@ class DotsAndBoxesGame:
                                 axis=0)
         return valid_moves
 
+    # Returns all remaining valid moves available to a player.
     @staticmethod
     def get_valid_moves(board, player=1):
-        size = (board.shape[1]-1)*2 + 1
+        size = (board.shape[1] - 1) * 2 + 1
         valid_moves = np.logical_not(board)
         valid_moves = np.hstack((valid_moves[:size:2, :-1].flatten(),
                                  valid_moves[1:size:2, :].flatten(), False))
@@ -195,14 +202,6 @@ class DotsAndBoxesGame:
     def has_valid_moves(self, board):
         is_board_full = np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :])
         return not is_board_full
-
-    def in_valid_moves(self, move_r, move_c, game_board):
-        valid_moves = self.get_valid_moves_coords(game_board)
-        valid = False
-        for move in valid_moves:
-            if move_r == move[0] and move_c == move[1]:
-                valid = True
-        return valid
 
     @staticmethod
     def dispDummy(board):
@@ -245,9 +244,3 @@ class DotsAndBoxesGame:
             pi_horizontal = pi_vertical
             pi_vertical = aux
         return l
-
-    # def playScenario(self, agent, scenario):
-    #     board = self.read_gamestate(scenario)
-    #     action = agent.play(board)
-    #     b, _ = self.get_next_state(board, 1, action)
-    #     return b

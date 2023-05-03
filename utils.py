@@ -40,6 +40,17 @@ class graph_data:
         plt.show()
 
     @staticmethod
+    def graphMarginVictory(num_games, data_points):
+        x = np.arange(1, num_games + 1)
+        y = data_points
+        plt.bar(x, y)
+        plt.xticks(np.arange(min(x), max(x) + 1, 1.0))
+        plt.xlabel("Game")
+        plt.ylabel("Margin of Victory")
+        plt.title("Average Margin of Victory")
+        plt.show()
+
+    @staticmethod
     def graphAverageTurn(num_games, t1, t2, name1, name2):
         x = np.arange(1, num_games + 1)
         y1 = t1
