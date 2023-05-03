@@ -54,7 +54,7 @@ class Arena:
             if verbose:
                 assert self.display
                 print("Turn ", str(it), "Player ", str(cur_player))
-                self.display(board)
+                self.display(self.game, board)
 
             if log_data:
                 turn_start = time.perf_counter()
@@ -76,7 +76,7 @@ class Arena:
         if verbose:
             assert self.display
             print("")
-            self.display(board)
+            self.display(self.game, board)
             print("Game over: Turn ", str(it), "Result ", str(self.game.get_game_ended(board, 1)))
         if log_data:
             game_end = time.perf_counter()

@@ -1,7 +1,7 @@
 import numpy as np
 from Arena import Arena
-from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame as db
-from DotsAndBoxes.Players import MinimaxPlayer, MCTSPlayer, HumanPlayer, AlphaZeroPlayer
+from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame as db
+from dotsandboxes.Players import MinimaxPlayer, MCTSPlayer, HumanPlayer, AlphaZeroPlayer
 
 
 def getPlayerType(game, player_num):

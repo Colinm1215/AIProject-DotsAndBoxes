@@ -2,8 +2,8 @@ import unittest
 
 import numpy as np
 import Arena
-from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame as db
-from DotsAndBoxes.Players import RandomPlayer, AlphaZeroPlayer, MinimaxPlayer, MCTSPlayer
+from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame as db
+from dotsandboxes.Players import RandomPlayer, AlphaZeroPlayer, MinimaxPlayer, MCTSPlayer
 from AlphaZero.keras.NNetWrapper import NNetWrapper
 
 scenarios3x3 = [['scenario1-3.1-matrix.txt', 8],

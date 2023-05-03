@@ -4,7 +4,7 @@ from AlphaZero.Coach import Coach
 from AlphaZero.utils import dotdict
 from AlphaZero.keras.NNetWrapper import NNetWrapper as nn
 
-from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame
+from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame
 
 log = logging.getLogger(__name__)
 

@@ -8,20 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ed485a8-f809-49e9-800d-4bd8de7bad8f" name="Changes" comment="Reorganize Files">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/Dockerfile.pytorch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/jupyter_notebook_config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/run_jupyter.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlphaZero/Coach.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlphaZero/Coach.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Arena.py" beforeDir="false" afterPath="$PROJECT_DIR$/Arena.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compete.py" beforeDir="false" afterPath="$PROJECT_DIR$/Compete.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DotsAndBoxes/Players.py" beforeDir="false" afterPath="$PROJECT_DIR$/DotsAndBoxes/Players.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/5x5/best.h5" beforeDir="false" afterPath="$PROJECT_DIR$/models/5x5/best.h5" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +73,7 @@
       <recent name="$PROJECT_DIR$/DotsAndBoxes/AlphaZero" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.python main.py">
+  <component name="RunManager" selected="Python.Compete">
     <configuration name="Compete" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIProject-DotsAndBoxes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -402,7 +392,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683083250476</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Reorganize Files">
+      <created>1683143573883</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1683143573883</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
