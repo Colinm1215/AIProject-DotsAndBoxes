@@ -9,17 +9,13 @@ class DotsAndBoxesGame:
         self.board_size = 2 * self.n + 1, self.n + 1
         self.action_size = 2 * (self.n + 1) * self.n + 1
 
+    # Reads in gamestate from file
     @staticmethod
     def read_gamestate(file_path):
         board = np.loadtxt(file_path, dtype=int)
         return board
 
-    # Creates a new gamestate of a size selected by the user. Used if no scenario is given.
-    def create_gameboard(self, size):
-        self.completed_boxes = np.zeros([self.n, self.n], dtype=int)
-        board = np.zeros((size * 2 + 1, size + 1), dtype=int)
-        return board
-
+    # Creates a new gameboard of specified size
     def create_board(self, size):
         self.completed_boxes = np.zeros([self.n, self.n], dtype=int)
         board = np.zeros((size * 2 + 1, size + 1), dtype=int)
@@ -33,6 +29,7 @@ class DotsAndBoxesGame:
     def toggle_turn(board, turn=False):
         board[4][-1] = turn
 
+    # Canonical form for AlphaZero
     @staticmethod
     def get_canonical_form(board, player):
         board = np.copy(board)
@@ -47,6 +44,7 @@ class DotsAndBoxesGame:
     def get_score(board):
         return board[0, -1], board[2, -1]
 
+    # Create display for board
     def create_display_grid(self, board):
         n = board.shape[1]
         board_str = ""
@@ -71,18 +69,19 @@ class DotsAndBoxesGame:
         board_str += f"Score: {Fore.RED}{board[0, -1]}{Style.RESET_ALL} x {Fore.BLUE}{board[2, -1]}{Style.RESET_ALL}\n"
         return board_str
 
+    # Display board
     def display_board(self, board):
-        board_str = self.create_display_grid(board)
-        print(f'{board_str}')
+        print(f'{self.create_display_grid(board)}')
 
+    # Needed for AlphaZero
     @staticmethod
     def stringRepresentation(board):
         return board.tobytes()
 
+    # Checks score of current board
     def check_score(self, board, move_r, move_c, player, get_boxes=False):
         b = board
-        b1 = 0
-        b2 = 0
+        b1, b2 = 0, 0
         # if horizontal
         if move_r % 2 == 0:
             # find box below
@@ -113,6 +112,7 @@ class DotsAndBoxesGame:
                 board[2][-1] += b1 + b2
         return still_turn
 
+    # Gets next game state
     def get_next_state(self, board, player, action, get_boxes=False):
         b = np.copy(board)
         if action == self.action_size - 1:
@@ -122,6 +122,7 @@ class DotsAndBoxesGame:
             b[4, -1] = still_turn
         return b, -player
 
+    # Places move on gameboard
     def place_move(self, board, player, action, get_boxes=False):
         if action == self.action_size - 1:
             board[4][-1] = 0
@@ -145,21 +146,25 @@ class DotsAndBoxesGame:
     def check_win(self, board):
         player1_count = board[0][-1]
         player2_count = board[2][-1]
+        # if still valid moves, return 0
         if not (np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :])):
             return 0
         else:
             if player1_count > player2_count:
+                # Player 1 win
                 return 1
             elif player2_count > player1_count:
+                # Player 2 win
                 return 2
             else:
+                # Draw
                 return 3
 
+    # Needed for AlphaZero
     def get_game_ended(self, board, player):
         # return 0 if not ended, 1 if player 1 won, -1 if player 1 lost
-
         # Has valid moves
-        if not np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :]):
+        if not (np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :])):
             return 0
         # Draw is counted as loss
         if board[0][-1] == board[2][-1]:
@@ -187,6 +192,7 @@ class DotsAndBoxesGame:
         return valid_moves
 
     # Returns all remaining valid moves available to a player.
+    # 1D boolean array to work with AlphaZero
     @staticmethod
     def get_valid_moves(board, player=1):
         size = (board.shape[1] - 1) * 2 + 1
@@ -199,17 +205,13 @@ class DotsAndBoxesGame:
             valid_moves[-1] = True
         return valid_moves
 
-    def has_valid_moves(self, board):
-        is_board_full = np.all(board[:self.board_size[0]:2, :-1]) and np.all(board[1:self.board_size[0]:2, :])
-        return not is_board_full
-
     @staticmethod
     def dispDummy(board):
         pass
 
+    # Symmetries for AlphaZero, from existing implementation
     def getSymmetries(self, board, pi):
         # mirror, rotational
-
         horizontal = np.copy(board[:self.board_size[0]:2, :-1])
         vertical = np.copy(board[1:self.board_size[0]:2, :])
         t = self.n * (self.n + 1)

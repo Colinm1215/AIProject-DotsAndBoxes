@@ -1,10 +1,9 @@
 import os
 import numpy as np
 
-from DotsAndBoxes.keras.NNetWrapper import NNetWrapper
-from MCTS import MCTS
-from utils import dotdict
-# from simulate import simulate
+from AlphaZero.keras.NNetWrapper import NNetWrapper
+from AlphaZero.MCTS import MCTS
+from AlphaZero.utils import dotdict
 
 
 class AlphaZeroPlayer:

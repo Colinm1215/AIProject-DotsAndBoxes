@@ -1,8 +1,8 @@
 import logging
 import coloredlogs
-from Coach import Coach
-from utils import dotdict
-from DotsAndBoxes.keras.NNetWrapper import NNetWrapper as nn
+from AlphaZero.Coach import Coach
+from AlphaZero.utils import dotdict
+from AlphaZero.keras.NNetWrapper import NNetWrapper as nn
 
 from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame
 

@@ -1,11 +1,10 @@
 import unittest
 
-import DotsAndBoxes.keras.DotsAndBoxesNN
 import numpy as np
-from Arena import Arena
+import Arena
 from DotsAndBoxes.DotsAndBoxesGame import DotsAndBoxesGame as db
 from DotsAndBoxes.Players import RandomPlayer, AlphaZeroPlayer, MinimaxPlayer, MCTSPlayer
-from DotsAndBoxes.keras.NNetWrapper import NNetWrapper
+from AlphaZero.keras.NNetWrapper import NNetWrapper
 
 scenarios3x3 = [['scenario1-3.1-matrix.txt', 8],
                 ['scenario2-3.2-matrix.txt', 9],
@@ -20,7 +19,7 @@ class TestDotsAndBoxes(unittest.TestCase):
     def test_game_run(self):
         g = db(3)
         rp = RandomPlayer(g).play
-        n1p = AlphaZeroPlayer(g, './models/3x3', 25)
+        n1p = AlphaZeroPlayer(g, '../models/3x3', 25)
 
         arena = Arena(rp, n1p.play, g, display=db.display_board)
         print(arena.playGames(2, verbose=False))
