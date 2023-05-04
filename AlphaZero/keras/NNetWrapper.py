@@ -1,3 +1,4 @@
+# Wrapper from https://github.com/suragnair/alpha-zero-general
 import numpy as np
 import os
 from AlphaZero.utils import dotdict

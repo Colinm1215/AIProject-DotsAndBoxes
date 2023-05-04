@@ -210,6 +210,7 @@ class DotsAndBoxesGame:
         pass
 
     # Symmetries for AlphaZero, from existing implementation
+    # From https://github.com/suragnair/alpha-zero-general
     def getSymmetries(self, board, pi):
         # mirror, rotational
         horizontal = np.copy(board[:self.board_size[0]:2, :-1])

@@ -28,7 +28,7 @@ args = dotdict({
 })
 
 args['numIters'] = 30
-args['numEps'] = 100
+args['numEps'] = 50
 args['arenaCompare'] = 40
 
 

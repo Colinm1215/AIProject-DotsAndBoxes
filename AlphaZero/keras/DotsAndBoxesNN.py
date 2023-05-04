@@ -3,12 +3,10 @@ from keras.layers import Activation, BatchNormalization, Dense, Dropout, Flatten
 from keras.optimizers import Adam
 
 
-class DotsAndBoxesNNet():
+class DotsAndBoxesNNet:
 
     def create_model(self, dropout):
-        # Neural Net
         self.input_boards = Input(shape=(self.board_x, self.board_y))  # s: batch_size x board_x x board_y
-
         flat = Flatten()(self.input_boards)
         s_fc1 = Dropout(dropout)(Activation('relu')(BatchNormalization(axis=1)(Dense(1024)(flat))))  # batch_size x 1024
         s_fc2 = Dropout(dropout)(Activation('relu')(BatchNormalization(axis=1)(Dense(1024)(s_fc1))))  # batch_size x 1024
@@ -20,10 +18,8 @@ class DotsAndBoxesNNet():
         return Model(inputs=self.input_boards, outputs=[self.pi, self.v])
 
     def __init__(self, game, args):
-        # game params
-        self.input_boards = None
-        self.v = None
-        self.pi = None
+        # init parameters
+        self.v, self.pi, self.input_boards = None, None, None
         self.board_x, self.board_y = game.board_size
         self.action_size = game.action_size
         self.args = args

@@ -1,7 +1,8 @@
 import unittest
+from time import sleep
 
 import numpy as np
-import Arena
+from Arena import Arena
 from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame as db
 from dotsandboxes.Players import RandomPlayer, AlphaZeroPlayer, MinimaxPlayer, MCTSPlayer
 from AlphaZero.keras.NNetWrapper import NNetWrapper
@@ -28,6 +29,7 @@ class TestDotsAndBoxes(unittest.TestCase):
         game = db(3)
         n1 = NNetWrapper(game)
         print(n1.nnet.model.summary())
+        sleep(2)
         print("")
 
     def test_scenarios3x3Minimax(self):

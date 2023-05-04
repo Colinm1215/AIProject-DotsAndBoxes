@@ -1,11 +1,11 @@
 import numpy as np
-import Arena
+from Arena import Arena
 from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame
 from dotsandboxes.Players import MCTSPlayer, MinimaxPlayer, AlphaZeroPlayer
 from graphDataUtils import graph_data
 
 if __name__ == '__main__':
-    size = 5
+    size = 3
     numGames = 2
 
     g = DotsAndBoxesGame(size)
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     mctsp1 = MCTSPlayer(g, 50)
     p1 = mmp1
     p2 = n1p
-    arena = Arena.Arena(p1.play, p2.play, g, display=DotsAndBoxesGame.display_board)
+    arena = Arena(p1.play, p2.play, g, display=DotsAndBoxesGame.display_board)
     oneWon, twoWon, draws, avg_t1, avg_t2, avg_game_time, avg_margin = arena.playGames(numGames, verbose=True, log_data=True)
     print()
     print("{}: {}, {}: {}, draws: {}, ".format(p1.name, oneWon, p2.name, twoWon, draws))
