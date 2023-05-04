@@ -82,7 +82,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
-      <option name="SDK_NAME" value="Python 3.10 (AIProject-DotsAndBoxes)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -125,7 +124,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
-      <option name="SDK_NAME" value="Python 3.10 (AIProject-DotsAndBoxes)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -224,11 +222,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.python main.py" />
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.train" />
       <item itemvalue="Python.Compete" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.python main.py" />
       <item itemvalue="Python.train5x5" />
+      <item itemvalue="Python.train" />
       <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_model_sum" />
       <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3MCTS" />
       <item itemvalue="Python tests.Python tests for test.test_dotsandboxes.TestDotsAndBoxes.test_scenarios3x3Minimax" />
